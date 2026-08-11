@@ -1,0 +1,44 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e5]:
+      - link [ref=e7] [cursor=pointer]:
+        - /url: "#"
+      - generic:
+        - navigation
+      - link "Get started" [ref=e10] [cursor=pointer]:
+        - /url: "#contact"
+  - main [ref=e11]:
+    - main [ref=e12]:
+      - heading "Culture changing marketing campaigns" [level=1] [ref=e13]
+    - generic [ref=e19]:
+      - heading [level=2] [ref=e21]:
+        - strong [ref=e22]: Core Business Operations
+      - generic [ref=e24]:
+        - generic [ref=e26]:
+          - generic [ref=e27]: "1"
+          - heading [level=3] [ref=e28]:
+            - strong [ref=e29]: Media Buying and Selling
+          - paragraph [ref=e30]: They manage the strategy, acquisition, and distribution of above-the-line and below-the-line media.
+        - generic [ref=e33]:
+          - generic [ref=e34]: "2"
+          - heading [level=3] [ref=e35]:
+            - strong [ref=e36]: Campaign Development
+          - paragraph [ref=e37]: The agency creates custom digital advertising campaigns and develops broadcast experiences across television and radio.
+        - generic [ref=e40]:
+          - generic [ref=e41]: "3"
+          - heading [level=3] [ref=e42]:
+            - strong [ref=e43]: Data and Analytics
+          - paragraph [ref=e44]: They leverage behavioral science data to track customer journeys and run social monitoring to track trending market data.
+        - generic [ref=e47]:
+          - generic [ref=e48]: "4"
+          - heading [level=3] [ref=e49]:
+            - strong [ref=e50]: Target Audience
+          - paragraph [ref=e51]: They work globally with both small and large commercial entities and have previously developed media for major brands including Channel 10, Jaguar, L'Oreal, and Qantas.
+    - generic [ref=e63]:
+      - heading "Contact us" [level=2] [ref=e67]
+      - link "1300 926 895" [ref=e74] [cursor=pointer]:
+        - /url: tel:1300926895
+    - generic [ref=e79]:
+      - link [ref=e82] [cursor=pointer]:
+        - /url: "#"
+      - generic [ref=e84]: © 2026 The Nova Group. All rights reserved.
