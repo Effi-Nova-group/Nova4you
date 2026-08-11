@@ -8,7 +8,9 @@
       "Bash(git --version)",
       "Bash(git init *)",
       "Bash(git add *)",
-      "Bash(git -c user.email=\"micky@dcatlas.io\" -c user.name=\"Effi-Nova-group\" commit -m \"Initial commit: Nova4you site with HubSpot contact form\")"
+      "Bash(git -c user.email=\"micky@dcatlas.io\" -c user.name=\"Effi-Nova-group\" commit -m \"Initial commit: Nova4you site with HubSpot contact form\")",
+      "Bash(git remote *)",
+      "Bash(git -c user.email=\"micky@dcatlas.io\" -c user.name=\"Effi-Nova-group\" commit -m \"Replace hero video with 4805615-hd_1920_1080_30fps\")"
     ]
   }
 }
