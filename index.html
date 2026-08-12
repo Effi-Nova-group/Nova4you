@@ -139,6 +139,34 @@ Uncomment to enable. Keep this message for futurehandoff clarity.
         <style>
 /* Custom CSS */
 
+/* Block 01 — Hero headline responsive overrides */
+.heading-hero-text {
+  padding-right: 24px;
+  max-width: calc(100% - 40px);
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  box-sizing: border-box;
+}
+@media (max-width: 991px) {
+  .heading-hero-text {
+    text-align: left;
+    left: 0;
+    right: auto;
+    margin: auto auto 32px 24px;
+    max-width: calc(100vw - 48px);
+    font-size: clamp(2.25rem, 9vw, 4rem);
+    line-height: 1.02;
+  }
+}
+@media (max-width: 479px) {
+  .heading-hero-text {
+    margin: auto auto 28px 20px;
+    max-width: calc(100vw - 40px);
+    font-size: clamp(2rem, 11vw, 3.25rem);
+  }
+}
+
 /* Block 02 — Impact / Capabilities (Option B) */
 .impact-section {
   --ink-dim: rgba(244,240,232,0.55);
