@@ -8,6 +8,9 @@
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
   <link href="css/webflow.css" rel="stylesheet" type="text/css">
   <link href="css/nova4you.webflow.css" rel="stylesheet" type="text/css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
   <style>@media (min-width:992px) {html.w-mod-js:not(.w-mod-ix) [data-w-id="14156406-4018-c65c-a1c8-d57b8e65796f"] {display:none;-webkit-transform:translate3d(0, 10px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 10px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 10px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 10px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0;height:0px;}}@media (max-width:991px) and (min-width:768px) {html.w-mod-js:not(.w-mod-ix) [data-w-id="14156406-4018-c65c-a1c8-d57b8e65796f"] {display:none;opacity:0;}html.w-mod-js:not(.w-mod-ix) [data-w-id="14156406-4018-c65c-a1c8-d57b8e65795d"] {opacity:0;}}@media (max-width:767px) and (min-width:480px) {html.w-mod-js:not(.w-mod-ix) [data-w-id="14156406-4018-c65c-a1c8-d57b8e65796f"] {display:none;opacity:0;}html.w-mod-js:not(.w-mod-ix) [data-w-id="14156406-4018-c65c-a1c8-d57b8e65795d"] {opacity:0;}}@media (max-width:479px) {html.w-mod-js:not(.w-mod-ix) [data-w-id="14156406-4018-c65c-a1c8-d57b8e65796f"] {display:none;opacity:0;}html.w-mod-js:not(.w-mod-ix) [data-w-id="14156406-4018-c65c-a1c8-d57b8e65795d"] {opacity:0;}}</style>
   <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
   <link href="images/favicon.jpeg" rel="icon" type="image/png" sizes="32x32" media="(prefers-color-scheme: light)">
@@ -135,6 +138,222 @@ Uncomment to enable. Keep this message for futurehandoff clarity.
       <div class="global-styles_custom w-embed">
         <style>
 /* Custom CSS */
+
+/* Block 02 — Impact / Capabilities (Option B) */
+.impact-section {
+  --ink-dim: rgba(244,240,232,0.55);
+  --rule: rgba(244,240,232,0.10);
+  --accent-red: #ff3d2e;
+  --accent-orange: #ff9a2e;
+  --accent-grad: linear-gradient(115deg, #ff3d2e 0%, #ff9a2e 100%);
+  --accent-glow: rgba(255,80,45,0.35);
+  padding: 8rem 0 6rem;
+  position: relative;
+  font-family: 'DM Sans', sans-serif;
+  color: #f4f0e8;
+}
+.impact-section .accent {
+  font-weight: 700;
+  background: var(--accent-grad);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* Manifesto hero row */
+.impact-hero-row {
+  display: grid; grid-template-columns: 1.15fr 1fr; gap: 80px;
+  align-items: end; padding: 0 6vw 60px; position: relative;
+}
+.impact-eyebrow {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--ink-dim); margin-bottom: 40px; font-weight: 500;
+}
+.impact-eyebrow::before { content: ""; width: 32px; height: 1px; background: var(--accent-grad); }
+.impact-headline-b {
+  font-family: 'DM Sans', sans-serif; font-weight: 500;
+  font-size: clamp(2.5rem, 6vw, 5.5rem); line-height: 0.98;
+  letter-spacing: -0.035em; margin: 0; color: #f4f0e8;
+}
+.impact-panel {
+  position: relative; aspect-ratio: 4/3; border-radius: 4px;
+  overflow: hidden; background: #0f0d0c;
+  background-image: url("images/impact-hero.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.impact-panel::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 70% 20%, rgba(255,60,45,0.22), transparent 60%),
+    radial-gradient(ellipse at 20% 80%, rgba(255,155,45,0.18), transparent 60%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+.impact-panel::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 55%;
+  background: linear-gradient(180deg, transparent 0%, rgba(5,5,5,0.55) 100%);
+  pointer-events: none;
+}
+.impact-panel-label {
+  position: absolute; bottom: 24px; left: 24px; right: 24px; z-index: 2;
+  display: flex; justify-content: space-between; align-items: end;
+  font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: rgba(255,255,255,0.85); font-weight: 500;
+}
+.impact-panel-label .lg {
+  font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em;
+  color: #fff; line-height: 1; text-transform: none;
+}
+/* Intro copy */
+.impact-intro {
+  padding: 0 6vw 100px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+  border-bottom: 1px solid var(--rule);
+}
+.impact-intro p {
+  font-size: 1.1rem; line-height: 1.65; color: #f4f0e8; font-weight: 300; margin: 0;
+}
+.impact-intro p:first-child { font-weight: 400; }
+.impact-intro p .accent-2 { color: var(--accent-orange); font-weight: 500; }
+
+/* Capabilities heading + rows */
+.impact-cap-heading {
+  padding: 100px 6vw 40px;
+  display: flex; justify-content: space-between; align-items: baseline;
+}
+.impact-cap-heading-label {
+  font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--ink-dim); font-weight: 500;
+}
+.impact-cap-heading h3 {
+  font-family: 'DM Sans', sans-serif; font-weight: 500; margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2.25rem); color: #f4f0e8; letter-spacing: -0.02em;
+}
+.impact-cap-list { border-top: 1px solid var(--rule); }
+.impact-cap-row {
+  display: grid; grid-template-columns: 100px 1fr auto;
+  align-items: center; gap: 40px;
+  padding: 36px 6vw; border-bottom: 1px solid var(--rule);
+  position: relative;
+}
+.impact-cap-num {
+  font-family: 'DM Sans', sans-serif; font-weight: 500;
+  font-size: 1.75rem; color: var(--accent-red); letter-spacing: -0.01em;
+}
+.impact-cap-name {
+  font-family: 'DM Sans', sans-serif; font-weight: 500;
+  font-size: clamp(1.5rem, 3.5vw, 3rem); letter-spacing: -0.02em;
+  line-height: 1; color: #f4f0e8;
+}
+.impact-cap-tag {
+  font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--ink-dim); font-weight: 500;
+}
+
+/* Closer */
+.impact-closer-b {
+  padding: 160px 6vw 40px; text-align: center;
+  font-family: 'DM Sans', sans-serif; font-weight: 500;
+  font-size: clamp(2rem, 5vw, 4rem); line-height: 1.1; letter-spacing: -0.035em;
+  position: relative; margin: 0; color: #f4f0e8;
+}
+.impact-closer-b::before {
+  content: ""; position: absolute; top: 60px; left: 50%; transform: translateX(-50%);
+  width: 60px; height: 3px; background: var(--accent-grad); border-radius: 3px;
+}
+
+@media (max-width: 900px) {
+  .impact-hero-row { grid-template-columns: 1fr; gap: 40px; padding: 0 5vw 40px; }
+  .impact-panel { aspect-ratio: 16/10; }
+  .impact-intro { grid-template-columns: 1fr; gap: 24px; padding: 0 5vw 60px; }
+  .impact-cap-heading { padding: 60px 5vw 24px; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .impact-cap-row { grid-template-columns: 60px 1fr; gap: 20px; padding: 24px 5vw; }
+  .impact-cap-tag { display: none; }
+  .impact-cap-num { font-size: 1.25rem; }
+  .impact-closer-b { padding: 100px 5vw 40px; }
+}
+
+/* Block 03 — Logo marquee */
+.logo-marquee-section {
+  padding: 4rem 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.02);
+}
+.logo-marquee {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 10%, #000 90%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 10%, #000 90%, transparent 100%);
+}
+.logo-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: logo-marquee-scroll 30s linear infinite;
+  will-change: transform;
+}
+.logo-marquee-set {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.logo-marquee-item {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  padding: 0 2.5rem;
+}
+.logo-marquee-item img {
+  max-height: 60px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.75;
+  transition: opacity 0.25s ease;
+}
+.logo-marquee-item:hover img { opacity: 1; }
+@keyframes logo-marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (max-width: 767px) {
+  .logo-marquee-track { animation-duration: 22s; }
+  .logo-marquee-item { padding: 0 1.5rem; height: 40px; }
+  .logo-marquee-item img { max-height: 40px; }
+}
+
+/* Block 04 — Contact full-width */
+.contact-stack { display: flex; flex-direction: column; gap: 2.5rem; }
+.contact-header { text-align: center; }
+.contact-tollfree {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.5rem 1.25rem;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 999px;
+  margin-bottom: 1.5rem;
+  background: rgba(255,255,255,0.03);
+}
+.contact-tollfree-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+}
+.contact-tollfree-number {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.125rem;
+  letter-spacing: 0.02em;
+}
+.contact-tollfree-number:hover { color: #fff; opacity: 0.85; }
+.contact-heading { margin: 0.5rem 0 0; }
+.contact-form-full { width: 100%; max-width: none; }
 </style>
       </div>
     </div>
@@ -311,106 +530,112 @@ Uncomment to enable. Keep this message for futurehandoff clarity.
     <main class="main-wrapper">
       <div></div>
       <main class="seaction-header-main">
-        <h1 class="heading-hero-text">Culture changing marketing campaigns</h1>
+        <h1 class="heading-hero-text">CULTURE-CHANGING MARKETING CAMPAIGNS</h1>
         <div id="canvas" class="canvas"></div>
         <div data-poster-url="videos/5039499-uhd_4096_2160_25fps_poster.0000000.jpg" data-video-urls="videos/16273480_1920_1080_60fps.mp4" data-autoplay="true" data-loop="true" data-wf-ignore="true" class="header_background-image w-background-video w-background-video-atom"><video id="c1cc902f-f837-c769-3e42-51466086462e-video" autoplay="" loop="" style="background-image:url(&quot;videos/5039499-uhd_4096_2160_25fps_poster.0000000.jpg&quot;)" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
             <source src="videos/16273480_1920_1080_60fps.mp4" data-wf-ignore="true">
           </video></div>
       </main>
-      <section class="section home-steps">
-        <div class="container-default w-container">
-          <div class="home-steps-wrapper">
-            <div class="split-content home-steps-left">
-              <h2 class="heading-style-h2 text-align-center"><strong class="heading-style-h2">Core Business Operations</strong></h2>
+      <section class="section impact-section">
+        <div class="impact-hero-row">
+          <div>
+            <h2 class="impact-headline-b">We inspire brands and people to create <span class="accent">impact</span>.</h2>
+          </div>
+          <div class="impact-panel">
+            <div class="impact-panel-label">
+              <span>Borderless<br>Creativity</span>
+              <span class="lg">n4y &mdash;</span>
             </div>
-            <div class="split-content home-steps-right">
-              <div class="w-layout-grid home-steps-grid">
-                <div data-w-id="e11b8dfc-08b4-56ac-c7de-726d910e00d4" style="-webkit-transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="card home-step">
-                  <div class="card-home-step-content">
-                    <div class="title h3-size card-home-step-number">1</div>
-                    <h3 class="title card-home-step"><strong>Media Buying and Selling</strong></h3>
-                    <p class="paragraph card-home-step">They manage the strategy, acquisition, and distribution of above-the-line and below-the-line media.</p>
-                  </div>
-                  <div class="image-wrapper card-home-step"><img src="images/Gemini_Generated_Image_n13rxzn13rxzn13r-1.jpg" loading="eager" sizes="(max-width: 767px) 48vw, (max-width: 991px) 356px, 462px" srcset="images/Gemini_Generated_Image_n13rxzn13rxzn13r-1-p-500.jpg 500w, images/Gemini_Generated_Image_n13rxzn13rxzn13r-1-p-800.jpg 800w, images/Gemini_Generated_Image_n13rxzn13rxzn13r-1.jpg 963w" alt="" class="image card-home-step"></div>
-                </div>
-                <div data-w-id="e11b8dfc-08b4-56ac-c7de-726d910e00e0" style="-webkit-transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="card home-step">
-                  <div class="card-home-step-content">
-                    <div class="title h3-size card-home-step-number">2</div>
-                    <h3 class="title card-home-step"><strong>Campaign Development</strong></h3>
-                    <p class="paragraph card-home-step">The agency creates custom digital advertising campaigns and develops broadcast experiences across television and radio. </p>
-                  </div>
-                  <div class="image-wrapper card-home-step"><img src="images/Gemini_Generated_Image_avcwanavcwanavcw-1.jpg" loading="eager" sizes="(max-width: 479px) 63vw, (max-width: 767px) 48vw, (max-width: 991px) 356px, 462px" srcset="images/Gemini_Generated_Image_avcwanavcwanavcw-1-p-500.jpg 500w, images/Gemini_Generated_Image_avcwanavcwanavcw-1-p-800.jpg 800w, images/Gemini_Generated_Image_avcwanavcwanavcw-1.jpg 962w" alt="" class="image card-home-step"></div>
-                </div>
-                <div data-w-id="e11b8dfc-08b4-56ac-c7de-726d910e00ec" style="-webkit-transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="card home-step">
-                  <div class="card-home-step-content">
-                    <div class="title h3-size card-home-step-number">3</div>
-                    <h3 class="title card-home-step"><strong>Data and Analytics</strong></h3>
-                    <p class="paragraph card-home-step">They leverage behavioral science data to track customer journeys and run social monitoring to track trending market data.</p>
-                  </div>
-                  <div class="image-wrapper card-home-step"><img src="images/Gemini_Generated_Image_si3gwusi3gwusi3g-1.jpg" loading="eager" sizes="(max-width: 767px) 48vw, (max-width: 991px) 356px, 462px" srcset="images/Gemini_Generated_Image_si3gwusi3gwusi3g-1-p-500.jpg 500w, images/Gemini_Generated_Image_si3gwusi3gwusi3g-1-p-800.jpg 800w, images/Gemini_Generated_Image_si3gwusi3gwusi3g-1.jpg 963w" alt="" class="image card-home-step"></div>
-                </div>
-                <div data-w-id="6a6e9423-0086-c85d-2f5c-a63a3fe2be6d" style="-webkit-transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="card home-step">
-                  <div class="card-home-step-content">
-                    <div class="title h3-size card-home-step-number">4</div>
-                    <h3 class="title card-home-step"><strong>Target Audience</strong></h3>
-                    <p class="paragraph card-home-step">They work globally with both small and large commercial entities and have previously developed media for major brands including Channel 10, Jaguar, L&#x27;Oreal, and Qantas.</p>
-                  </div>
-                  <div class="image-wrapper card-home-step"><img src="images/Gemini_Generated_Image_2rvr0a2rvr0a2rvr-1.jpg" loading="eager" sizes="(max-width: 479px) 63vw, (max-width: 767px) 48vw, (max-width: 991px) 356px, 462px" srcset="images/Gemini_Generated_Image_2rvr0a2rvr0a2rvr-1-p-500.jpg 500w, images/Gemini_Generated_Image_2rvr0a2rvr0a2rvr-1-p-800.jpg 800w, images/Gemini_Generated_Image_2rvr0a2rvr0a2rvr-1.jpg 963w" alt="" class="image card-home-step"></div>
-                </div>
-              </div>
-              <div class="bg-gradient-blur-wrapper home-steps">
-                <div class="bg-gradient-blur-circle-5 pink"></div>
-                <div class="bg-gradient-blur-circle-4 blue"></div>
-                <div class="bg-gradient-blur-circle-1 purple"></div>
-              </div>
+          </div>
+        </div>
+        <div class="impact-intro">
+          <p>We believe real impact occurs at the intersection of talent and capability. To foster better collaboration, we have removed barriers from both our business model and operations.</p>
+          <p>We call this <span class="accent-2">borderless creativity</span> &mdash; a way of casting the right people, with the right talent, to solve the unique challenges each client faces. Unconfined by media choice or convention, it delivers effective impact wherever, whenever, and however it matters most.</p>
+        </div>
+        <div class="impact-cap-heading">
+          <span class="impact-cap-heading-label">Capabilities &middot; 05</span>
+          <h3>Five connected disciplines.</h3>
+        </div>
+        <div class="impact-cap-list">
+          <div class="impact-cap-row">
+            <div class="impact-cap-num">01</div>
+            <div class="impact-cap-name">Advertising</div>
+            <div class="impact-cap-tag">Above &amp; below the line</div>
+          </div>
+          <div class="impact-cap-row">
+            <div class="impact-cap-num">02</div>
+            <div class="impact-cap-name">Public Relations &amp; Influence</div>
+            <div class="impact-cap-tag">Earned &amp; owned</div>
+          </div>
+          <div class="impact-cap-row">
+            <div class="impact-cap-num">03</div>
+            <div class="impact-cap-name">CX &amp; Customer Relationship Design</div>
+            <div class="impact-cap-tag">Journeys &amp; systems</div>
+          </div>
+          <div class="impact-cap-row">
+            <div class="impact-cap-num">04</div>
+            <div class="impact-cap-name">Growth &amp; Innovation</div>
+            <div class="impact-cap-tag">Product &amp; strategy</div>
+          </div>
+          <div class="impact-cap-row">
+            <div class="impact-cap-num">05</div>
+            <div class="impact-cap-name">Health</div>
+            <div class="impact-cap-tag">Specialist practice</div>
+          </div>
+        </div>
+        <h3 class="impact-closer-b">
+          We do work that impacts <span class="accent">culture</span>.<br>
+          And we do work that <span class="accent">works</span>.
+        </h3>
+      </section>
+      <section class="section logo-marquee-section">
+        <div class="logo-marquee">
+          <div class="logo-marquee-track">
+            <div class="logo-marquee-set">
+              <div class="logo-marquee-item"><img src="images/jll-logo.png" alt="JLL" loading="lazy"></div>
+              <div class="logo-marquee-item"><img src="images/ibm-logo.png" alt="IBM" loading="lazy"></div>
+              <div class="logo-marquee-item"><img src="images/disney-logo.png" alt="Disney" loading="lazy"></div>
+              <div class="logo-marquee-item"><img src="images/fifa-logo.png" alt="FIFA" loading="lazy"></div>
+              <div class="logo-marquee-item"><img src="images/netflix-logo.png" alt="Netflix" loading="lazy"></div>
+            </div>
+            <div class="logo-marquee-set" aria-hidden="true">
+              <div class="logo-marquee-item"><img src="images/jll-logo.png" alt="" loading="lazy"></div>
+              <div class="logo-marquee-item"><img src="images/ibm-logo.png" alt="" loading="lazy"></div>
+              <div class="logo-marquee-item"><img src="images/disney-logo.png" alt="" loading="lazy"></div>
+              <div class="logo-marquee-item"><img src="images/fifa-logo.png" alt="" loading="lazy"></div>
+              <div class="logo-marquee-item"><img src="images/netflix-logo.png" alt="" loading="lazy"></div>
             </div>
           </div>
         </div>
       </section>
-      <section id="contact" class="section_contact">
+      <section id="contact" class="section_contact contact-full">
         <div class="padding-global">
           <div class="container-large">
             <div class="padding-section-large-3">
-              <div class="contact_component">
-                <div class="w-layout-grid contact_content">
-                  <div class="contact_content-left">
-                    <div class="margin-bottom margin-medium">
-                      <div class="contact_heading-wrapper">
-                        <div class="margin-bottom margin-small">
-                          <h2 class="heading-style-h2-2">Contact us</h2>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="contact_contact-list">
-                      <div id="w-node-cd04297b-2bef-8d40-03a7-4b0c2f70e3af-7444f4a6" class="contact_item">
-                        <div class="contact5_icon-wrapper">
-                          <div class="icon-embed-xsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
-                              <path d="M4.11902 3.34473H7.61902C7.80275 3.34474 7.93038 3.39945 8.03503 3.49805C8.12854 3.58614 8.20705 3.70059 8.2655 3.85156L8.31726 4.01465L8.9823 7.02832C9.01497 7.26011 9.00744 7.44511 8.97253 7.5918C8.94139 7.72276 8.8796 7.83104 8.78015 7.92578L8.77332 7.93164L6.25574 10.415L5.97644 10.6904L6.17664 11.0264C6.60337 11.7435 7.05685 12.416 7.53699 13.042C8.01981 13.6715 8.55599 14.2696 9.14441 14.8369C9.75779 15.4701 10.399 16.0453 11.0682 16.5605C11.7434 17.0804 12.4488 17.5353 13.1844 17.9248L13.5155 18.0996L13.7762 17.832L16.1815 15.3643L16.1913 15.3535C16.3309 15.2021 16.4775 15.111 16.6337 15.0645C16.7647 15.0256 16.8944 15.012 17.0253 15.0215L17.1571 15.0391L19.9774 15.6631C20.1431 15.7092 20.2749 15.7806 20.3817 15.875L20.4813 15.9775C20.5981 16.1186 20.6552 16.2764 20.6552 16.4707V19.8809C20.6552 20.1178 20.581 20.2895 20.4374 20.4316C20.2909 20.5766 20.1181 20.6494 19.8866 20.6494C18.0114 20.6494 16.0911 20.1991 14.1219 19.2842C12.1538 18.3698 10.3229 17.0691 8.62976 15.376C7.0427 13.7889 5.79967 12.0798 4.89539 10.249L4.71863 9.88086C3.80159 7.90938 3.35046 5.99008 3.35046 4.11914C3.35048 3.94128 3.39174 3.79881 3.47351 3.67773L3.56921 3.56348C3.71327 3.41863 3.88502 3.34473 4.11902 3.34473ZM4.06628 4.5752C4.09721 5.28818 4.20923 6.0365 4.39929 6.81836C4.59086 7.60639 4.89058 8.47618 5.2948 9.4248L5.58386 10.1035L6.1073 9.58301L8.12683 7.5752L8.32019 7.38281L8.26257 7.11621L7.69421 4.44922L7.60925 4.05371H4.04382L4.06628 4.5752ZM19.9462 16.377L19.5477 16.2949L17.0624 15.7803L16.7909 15.7246L16.5985 15.9248L14.6356 17.9824L14.1542 18.4863L14.787 18.7812C15.4818 19.1045 16.2353 19.3664 17.0448 19.5693C17.8555 19.7725 18.6477 19.8945 19.4208 19.9336L19.9462 19.96V16.377Z" fill="currentColor" stroke="currentColor"></path>
-                            </svg></div>
-                        </div>
-                        <a href="tel:1300926895" class="w-inline-block">
-                          <div>1300 926 895</div>
-                        </a>
-                      </div>
-                    </div>
+              <div class="contact_component contact-stack">
+                <div class="contact-header">
+                  <div class="contact-tollfree">
+                    <span class="contact-tollfree-label">Toll Free</span>
+                    <a href="tel:1300926895" class="contact-tollfree-number">1 300 926 895</a>
                   </div>
-                  <div class="contact5_form_component hubspot-form-card">
-                    <script src="https://js.hsforms.net/forms/embed/44484340.js" defer></script>
-                    <div class="hs-form-frame" data-region="na1" data-form-id="68e1f3c6-b6a3-42fe-a699-b0cc17730c7c" data-portal-id="44484340"></div>
-                  </div>
-                  <style>
-                    .hubspot-form-card {
-                      background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.02) 100%), #0f0f12;
-                      border: 1px solid rgba(255, 255, 255, 0.08);
-                      border-radius: 16px;
-                      padding: 2rem;
-                      box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.6), 0 8px 20px -8px rgba(0, 0, 0, 0.4);
-                    }
-                    @media (max-width: 767px) {
-                      .hubspot-form-card { padding: 1.25rem; border-radius: 12px; }
-                    }
-                  </style>
+                  <h2 class="heading-style-h2-2 contact-heading">Contact us</h2>
                 </div>
+                <div class="contact5_form_component hubspot-form-card contact-form-full">
+                  <script src="https://js.hsforms.net/forms/embed/44484340.js" defer></script>
+                  <div class="hs-form-frame" data-region="na1" data-form-id="68e1f3c6-b6a3-42fe-a699-b0cc17730c7c" data-portal-id="44484340"></div>
+                </div>
+                <style>
+                  .hubspot-form-card {
+                    background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.02) 100%), #0f0f12;
+                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    border-radius: 16px;
+                    padding: 2rem;
+                    box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.6), 0 8px 20px -8px rgba(0, 0, 0, 0.4);
+                  }
+                  @media (max-width: 767px) {
+                    .hubspot-form-card { padding: 1.25rem; border-radius: 12px; }
+                  }
+                </style>
               </div>
             </div>
           </div>

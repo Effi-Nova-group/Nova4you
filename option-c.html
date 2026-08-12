@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Option C — Bold Type Statement</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --panel: #f2ede3;
+    --ink: #f2ede3;
+    --ink-dim: rgba(242,237,227,0.6);
+    --rule: rgba(242,237,227,0.12);
+    --accent: #ff2f6d;
+    --accent-2: #ffb800;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--ink); font-family: 'Manrope', sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+  .switcher {
+    position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+    z-index: 200; display: flex; gap: 4px; padding: 6px;
+    background: rgba(10,10,10,0.85); backdrop-filter: blur(12px);
+    border: 1px solid var(--rule); border-radius: 999px;
+    font-family: 'Manrope', sans-serif; font-size: 12px; letter-spacing: 0.08em;
+  }
+  .switcher a { padding: 8px 16px; color: var(--ink-dim); text-decoration: none; border-radius: 999px; text-transform: uppercase; transition: all 0.2s; }
+  .switcher a:hover { color: var(--ink); }
+  .switcher a.active { background: var(--ink); color: var(--bg); }
+
+  /* HERO STACK */
+  .type-hero {
+    padding: 160px 5vw 80px; position: relative; overflow: hidden;
+  }
+  .type-hero::before {
+    content: ""; position: absolute; top: 20%; right: -10%; width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(255,47,109,0.22), transparent 60%);
+    filter: blur(80px); pointer-events: none;
+  }
+  .type-hero::after {
+    content: ""; position: absolute; bottom: -10%; left: -10%; width: 40vw; height: 40vw;
+    background: radial-gradient(circle, rgba(255,184,0,0.18), transparent 60%);
+    filter: blur(80px); pointer-events: none;
+  }
+  .type-eyebrow {
+    display: inline-flex; align-items: center; gap: 14px;
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600; margin-bottom: 40px;
+    padding: 8px 16px; border: 1px solid var(--accent); border-radius: 999px;
+  }
+  .type-eyebrow::before {
+    content: ""; width: 6px; height: 6px; background: var(--accent); border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  .type-headline {
+    font-family: 'Anton', sans-serif; font-weight: 400;
+    line-height: 0.85; letter-spacing: -0.02em; text-transform: uppercase;
+    position: relative;
+  }
+  .type-headline .line { display: block; }
+  .type-headline .l1 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-family: 'Manrope', sans-serif; font-weight: 300; text-transform: none;
+    letter-spacing: -0.02em; color: var(--ink-dim); margin-bottom: 12px;
+  }
+  .type-headline .l2 {
+    font-size: clamp(4rem, 15vw, 15rem); color: var(--ink);
+  }
+  .type-headline .l3 {
+    font-size: clamp(2rem, 5.5vw, 4.5rem);
+    font-family: 'Manrope', sans-serif; font-weight: 300; text-transform: none;
+    letter-spacing: -0.025em; color: var(--ink-dim); margin: 12px 0;
+  }
+  .type-headline .l4 {
+    font-size: clamp(4.5rem, 18vw, 18rem); color: var(--accent);
+    display: inline-block;
+  }
+  .type-headline .l4 .dot { color: var(--accent-2); }
+
+  /* INTRO PARAGRAPH */
+  .type-intro {
+    max-width: 55ch; padding: 120px 5vw; margin: 0 auto;
+    text-align: center; position: relative;
+  }
+  .type-intro p {
+    font-size: clamp(1.15rem, 1.5vw, 1.35rem); line-height: 1.6;
+    color: var(--ink); font-weight: 300;
+  }
+  .type-intro p em {
+    font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400;
+    color: var(--accent); font-size: 1.05em;
+  }
+
+  /* CAPABILITIES - full-width bars */
+  .type-caps {
+    border-top: 1px solid var(--rule);
+  }
+  .type-caps-heading {
+    padding: 60px 5vw 40px; display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .type-caps-heading small {
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ink-dim); font-weight: 600;
+  }
+  .type-caps-heading h3 {
+    font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400;
+    font-size: clamp(1.4rem, 2.5vw, 2rem); color: var(--ink);
+  }
+
+  .cap-bar {
+    display: grid; grid-template-columns: 120px 1fr auto;
+    align-items: center; gap: 40px;
+    padding: 40px 5vw; border-top: 1px solid var(--rule);
+    position: relative; overflow: hidden;
+    transition: color 0.4s ease;
+  }
+  .cap-bar:last-child { border-bottom: 1px solid var(--rule); }
+  .cap-bar::before {
+    content: ""; position: absolute; inset: 0;
+    background: var(--accent); transform: translateX(-100%);
+    transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1);
+  }
+  .cap-bar:hover::before { transform: translateX(0); }
+  .cap-bar:hover { color: var(--bg); }
+  .cap-bar > * { position: relative; z-index: 1; transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1); }
+  .cap-bar:hover .cap-bar-num { transform: translateX(10px); color: var(--bg); }
+  .cap-bar:hover .cap-bar-name { transform: translateX(20px); }
+  .cap-bar:hover .cap-bar-meta { transform: translateX(-10px); color: var(--bg); }
+
+  .cap-bar-num {
+    font-family: 'Anton', sans-serif; font-size: 3rem; line-height: 1;
+    color: var(--accent); letter-spacing: 0; transition: color 0.4s;
+  }
+  .cap-bar-name {
+    font-family: 'Anton', sans-serif; text-transform: uppercase;
+    font-size: clamp(1.75rem, 5vw, 4.5rem); line-height: 0.95;
+    letter-spacing: -0.01em;
+  }
+  .cap-bar-meta {
+    font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--ink-dim); font-weight: 600; transition: color 0.4s;
+  }
+
+  /* BORDERLESS PANEL - inverted */
+  .borderless-panel {
+    margin: 120px 5vw 0; padding: 100px 8vw;
+    background: var(--panel); color: #0a0a0a; border-radius: 8px;
+    position: relative; overflow: hidden;
+  }
+  .borderless-panel::before {
+    content: "\201C"; position: absolute; top: -20px; left: 40px;
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 14rem; color: var(--accent); line-height: 1;
+  }
+  .borderless-panel-label {
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin-bottom: 32px;
+  }
+  .borderless-panel-quote {
+    font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400;
+    font-size: clamp(2rem, 5.5vw, 5rem); line-height: 1.05;
+    letter-spacing: -0.025em; max-width: 20ch;
+  }
+  .borderless-panel-quote strong {
+    background: linear-gradient(120deg, var(--accent) 0%, var(--accent-2) 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    font-weight: 400;
+  }
+  .borderless-panel-body {
+    max-width: 62ch; margin-top: 48px; font-family: 'Manrope', sans-serif;
+    font-size: 1.05rem; line-height: 1.65; color: rgba(10,10,10,0.75); font-weight: 400;
+  }
+
+  /* CLOSER - alternating alignment */
+  .type-closer {
+    padding: 160px 5vw 120px; position: relative;
+  }
+  .type-closer .cl {
+    font-family: 'Anton', sans-serif; text-transform: uppercase;
+    font-size: clamp(3rem, 12vw, 12rem); line-height: 0.9;
+    letter-spacing: -0.015em; display: block;
+  }
+  .type-closer .cl-1 { text-align: left; }
+  .type-closer .cl-2 { text-align: right; color: var(--accent); font-family: 'Playfair Display', serif; font-style: italic; text-transform: none; letter-spacing: -0.03em; font-weight: 700; }
+  .type-closer .cl-3 { text-align: left; margin-top: 20px; }
+  .type-closer .cl-4 { text-align: right; color: var(--accent-2); font-family: 'Playfair Display', serif; font-style: italic; text-transform: none; letter-spacing: -0.03em; font-weight: 700; }
+  .type-closer .amp {
+    display: inline-block; font-family: 'Playfair Display', serif; font-style: italic;
+    color: var(--ink-dim); font-weight: 400; font-size: 0.75em;
+    text-transform: none; margin-right: 0.2em;
+  }
+
+  @media (max-width: 900px) {
+    .type-hero { padding: 120px 5vw 40px; }
+    .type-intro { padding: 60px 5vw; }
+    .cap-bar { grid-template-columns: 60px 1fr; gap: 20px; padding: 24px 5vw; }
+    .cap-bar-meta { display: none; }
+    .cap-bar-num { font-size: 2rem; }
+    .borderless-panel { padding: 60px 6vw; margin: 80px 5vw 0; }
+    .borderless-panel::before { font-size: 8rem; top: -10px; left: 20px; }
+    .type-closer { padding: 80px 5vw 60px; }
+  }
+</style>
+</head>
+<body>
+  <nav class="switcher">
+    <a href="option-a.html">Option A</a>
+    <a href="option-b.html">Option B</a>
+    <a href="option-c.html" class="active">Option C</a>
+    <a href="index.html">Site</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="type-hero">
+    <div class="type-eyebrow">Chapter 02 &mdash; The Nova Group</div>
+    <h2 class="type-headline">
+      <span class="line l1">We inspire brands &amp; people to create</span>
+      <span class="line l2">Impact.</span>
+      <span class="line l3">Real impact happens at the intersection of</span>
+      <span class="line l4">Talent<span class="dot">.</span></span>
+    </h2>
+  </section>
+
+  <!-- INTRO -->
+  <div class="type-intro">
+    <p>To foster better collaboration, we have removed the barriers from both our <em>business model</em> and operations &mdash; so our five connected capabilities can work together as one.</p>
+  </div>
+
+  <!-- CAPABILITIES BARS -->
+  <section class="type-caps">
+    <div class="type-caps-heading">
+      <small>Five Connected Capabilities</small>
+      <h3>Cast the right people. Every time.</h3>
+    </div>
+    <div class="cap-bar">
+      <div class="cap-bar-num">01</div>
+      <div class="cap-bar-name">Advertising</div>
+      <div class="cap-bar-meta">Above &amp; below the line</div>
+    </div>
+    <div class="cap-bar">
+      <div class="cap-bar-num">02</div>
+      <div class="cap-bar-name">Public Relations &amp; Influence</div>
+      <div class="cap-bar-meta">Earned attention</div>
+    </div>
+    <div class="cap-bar">
+      <div class="cap-bar-num">03</div>
+      <div class="cap-bar-name">CX &amp; CRD</div>
+      <div class="cap-bar-meta">Customer relationship design</div>
+    </div>
+    <div class="cap-bar">
+      <div class="cap-bar-num">04</div>
+      <div class="cap-bar-name">Growth &amp; Innovation</div>
+      <div class="cap-bar-meta">New markets, new value</div>
+    </div>
+    <div class="cap-bar">
+      <div class="cap-bar-num">05</div>
+      <div class="cap-bar-name">Health</div>
+      <div class="cap-bar-meta">Specialist practice</div>
+    </div>
+  </section>
+
+  <!-- BORDERLESS PANEL -->
+  <div class="borderless-panel">
+    <div class="borderless-panel-label">Our Approach</div>
+    <blockquote class="borderless-panel-quote">
+      We call this <strong>borderless creativity.</strong>
+    </blockquote>
+    <p class="borderless-panel-body">
+      Far more than just a connected, specialist way of working, borderless creativity also defines the type of work we do. Unconfined by media choice or convention, this strategy allows us to offer our clients a way of working that delivers the most effective impact — wherever, whenever, and however it matters most.
+    </p>
+  </div>
+
+  <!-- CLOSER -->
+  <section class="type-closer">
+    <span class="cl cl-1">We do work</span>
+    <span class="cl cl-2">that impacts <span style="text-decoration:underline; text-decoration-thickness:6px; text-underline-offset:12px;">culture.</span></span>
+    <span class="cl cl-3"><span class="amp">&amp;</span> we do work</span>
+    <span class="cl cl-4">that works.</span>
+  </section>
+</body>
+</html>
