@@ -2,6 +2,31 @@
 // Shared site header (Webflow nav)
 ---
 
+<style is:global>
+  /* Keep the "Get started" button visible on tablet/mobile. Webflow's stock
+     CSS hides .header-left entirely below 992px and expects an ix2 mobile
+     menu, which we don't ship — so we force the CTA to stay and drop the
+     broken hamburger button. */
+  @media screen and (max-width: 991px) {
+    .header .split-content.header-left {
+      display: flex !important;
+      align-items: center;
+      gap: 12px;
+    }
+    .header .menu-button { display: none !important; }
+    .header .split-content.header-left .nav-link.sign-in.none { display: none !important; }
+    .header .split-content.header-left .button-primary-gradient.header-button {
+      display: inline-block !important;
+      margin-right: 0;
+    }
+  }
+  @media screen and (max-width: 479px) {
+    .header .button-primary.small-v2 { padding: 12px 20px; font-size: 0.95rem; }
+  }
+</style>
+
+
+
 <div
   data-animation="over-left"
   class="header w-nav"
