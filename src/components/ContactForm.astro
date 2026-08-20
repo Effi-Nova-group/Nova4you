@@ -133,7 +133,7 @@
       inset 0 1px 0 rgba(255,255,255,0.08),
       0 0 0 3px rgba(255,120,80,0.18);
   }
-  .n4y-submit-wrap { margin: 0.5rem auto 0; display: inline-block; }
+  .n4y-submit-wrap { margin: 0.5rem auto 0; display: inline-block !important; }
   .n4y-submit.button-primary {
     display: block;
     font-family: system-ui, -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
@@ -159,6 +159,7 @@
   @media (max-width: 640px) {
     .n4y-form-card { padding: 1.5rem; border-radius: 14px; }
     .n4y-form-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .n4y-submit-wrap { display: block !important; width: 100%; }
     .n4y-submit { width: 100%; }
   }
 </style>
