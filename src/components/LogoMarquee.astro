@@ -1,0 +1,36 @@
+---
+const logos = [
+  { src: '/images/jll-logo.png', alt: 'JLL' },
+  { src: '/images/ibm-logo.png', alt: 'IBM' },
+  { src: '/images/disney-logo.png', alt: 'Disney' },
+  { src: '/images/fifa-logo.png', alt: 'FIFA' },
+  { src: '/images/netflix-logo.png', alt: 'Netflix' },
+  { src: '/images/deloitte-logo.png', alt: 'Deloitte' },
+  { src: '/images/gartner-logo.png', alt: 'Gartner' },
+  { src: '/images/gnc-logo.png', alt: 'GNC' },
+  { src: '/images/lv-logo.png', alt: 'Louis Vuitton' },
+  { src: '/images/porche-1.png', alt: 'Porsche' },
+  { src: '/images/winnings-logo.png', alt: 'Winnings' },
+  { src: '/images/appliances-logo.png', alt: 'Appliances Online' },
+  { src: '/images/f1-logo.png', alt: 'F1' },
+];
+
+// Triple the array for a seamless marquee loop
+const track = [
+  ...logos.map((l) => ({ ...l, ariaHidden: false })),
+  ...logos.map((l) => ({ ...l, ariaHidden: true })),
+  ...logos.map((l) => ({ ...l, ariaHidden: true })),
+];
+---
+
+<section class="section logo-marquee-section">
+  <div class="logo-marquee">
+    <div class="logo-marquee-track">
+      {track.map((logo) => (
+        <div class="logo-marquee-item" aria-hidden={logo.ariaHidden ? 'true' : undefined}>
+          <img src={logo.src} alt={logo.ariaHidden ? '' : logo.alt} />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

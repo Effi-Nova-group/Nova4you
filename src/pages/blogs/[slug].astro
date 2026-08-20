@@ -1,0 +1,102 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post, allPosts: posts },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  allPosts: CollectionEntry<'blog'>[];
+}
+
+const { post, allPosts } = Astro.props;
+const { Content } = await render(post);
+
+const canonical = `https://nova4you.com/blogs/${post.id}/`;
+const publishedIso = `${post.data.publishDate.toISOString().slice(0, 10)}T00:00:00+10:00`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  headline: post.data.headline,
+  description: post.data.description,
+  image: `https://nova4you.com${post.data.image}`,
+  datePublished: post.data.publishDate.toISOString().slice(0, 10),
+  dateModified: post.data.publishDate.toISOString().slice(0, 10),
+  articleSection: post.data.category,
+  keywords: post.data.keywords,
+  inLanguage: 'en-AU',
+  author: { '@type': 'Organization', name: 'The Nova Group', url: 'https://nova4you.com/' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'The Nova Group',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://nova4you.com/images/Screenshot-2026-07-24-at-10.30.50-am-1.png',
+    },
+  },
+};
+
+const related = post.data.related
+  .map((slug) => allPosts.find((p) => p.id === slug))
+  .filter((p): p is CollectionEntry<'blog'> => Boolean(p));
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  canonical={canonical}
+  keywords={post.data.keywords}
+  ogType="article"
+  ogTitle={post.data.headline}
+  ogDescription={post.data.description}
+  ogImage={`https://nova4you.com${post.data.image}`}
+  ogImageAlt={post.data.imageAlt}
+  twitterTitle={post.data.headline}
+  twitterDescription={post.data.description}
+  twitterImage={`https://nova4you.com${post.data.image}`}
+  articleMeta={{
+    publishedTime: publishedIso,
+    section: post.data.category,
+    tags: post.data.tags,
+  }}
+  bodyClass="blog-body body"
+  includeBlogCss
+  jsonLd={jsonLd}
+>
+  <article>
+    <header class="post-header">
+      <a href="/blogs/" class="post-back">All insights</a>
+      <div class="post-meta">
+        <span class="tag">{post.data.category}</span>
+        <span class="dot"></span>
+        <span>{post.data.readTime}</span>
+      </div>
+      <h1>{post.data.headline}</h1>
+      <p class="post-dek">{post.data.dek}</p>
+    </header>
+
+    <div class="post-hero-image">
+      <img src={post.data.image} alt={post.data.imageAlt} />
+    </div>
+
+    <div class="post-body">
+      <Content />
+    </div>
+  </article>
+
+  <section class="related-block">
+    <h2>Continue reading</h2>
+    <div class="related-grid">
+      {related.map((rel) => <BlogCard post={rel} />)}
+    </div>
+  </section>
+</BaseLayout>

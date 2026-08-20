@@ -1,0 +1,20 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+---
+
+<a class="blog-card" href={`/blogs/${post.id}/`}>
+  <div class="blog-card-image"><img src={post.data.image} alt={post.data.imageAlt} /></div>
+  <div class="blog-card-meta">
+    <span class="blog-card-tag">{post.data.category}</span>
+    <span class="dot"></span>
+    <span>{post.data.readTime}</span>
+  </div>
+  <h3>{post.data.headline}</h3>
+  <p>{post.data.description}</p>
+</a>

@@ -1,0 +1,204 @@
+---
+// Web3Forms strategy call form
+---
+
+<section id="contact" class="section_contact contact-full">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large-3">
+        <div class="contact_component contact-stack">
+          <div class="contact-header">
+            <div class="contact-tollfree">
+              <span class="contact-tollfree-label">Toll Free</span>
+              <a href="tel:1300926895" class="contact-tollfree-number">1 300 926 895</a>
+            </div>
+            <h2 class="heading-style-h2-2 contact-heading">Contact us</h2>
+          </div>
+          <div class="contact5_form_component n4y-form-card contact-form-full">
+            <form id="n4y-contact-form" class="n4y-form" novalidate>
+              <input type="hidden" name="access_key" value="ab2c7e18-bf19-443f-adef-05331026e90f" />
+              <input type="hidden" name="subject" value="New strategy call request — nova4you.com" />
+              <input type="hidden" name="from_name" value="Nova4you Website" />
+              <input type="checkbox" name="botcheck" class="n4y-hp" tabindex="-1" autocomplete="off" />
+              <div class="n4y-form-grid">
+                <div class="n4y-field">
+                  <label for="n4y-first">First Name<span class="req">*</span></label>
+                  <input id="n4y-first" type="text" name="first_name" autocomplete="given-name" required />
+                </div>
+                <div class="n4y-field">
+                  <label for="n4y-last">Last Name<span class="req">*</span></label>
+                  <input id="n4y-last" type="text" name="last_name" autocomplete="family-name" required />
+                </div>
+                <div class="n4y-field n4y-field-full">
+                  <label for="n4y-email">Business Email<span class="req">*</span></label>
+                  <input id="n4y-email" type="email" name="email" autocomplete="email" required />
+                </div>
+                <div class="n4y-field">
+                  <label for="n4y-company">Company Name<span class="req">*</span></label>
+                  <input id="n4y-company" type="text" name="company" autocomplete="organization" required />
+                </div>
+                <div class="n4y-field">
+                  <label for="n4y-phone">Phone Number<span class="req">*</span></label>
+                  <input id="n4y-phone" type="tel" name="phone" autocomplete="tel" required />
+                </div>
+              </div>
+              <div class="button-primary-gradient header-button n4y-submit-wrap">
+                <button type="submit" class="button-primary small-v2 w-button n4y-submit">Book a Strategy Call</button>
+              </div>
+              <div id="n4y-form-result" class="n4y-form-result" role="status" aria-live="polite"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .n4y-form-card {
+    position: relative;
+    background:
+      radial-gradient(80% 60% at 0% 0%, rgba(255,60,40,0.14), transparent 60%),
+      radial-gradient(80% 60% at 100% 100%, rgba(255,120,40,0.09), transparent 60%),
+      linear-gradient(180deg, rgba(20,10,10,0.55) 0%, rgba(10,5,5,0.6) 100%);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow:
+      0 40px 80px -30px rgba(0,0,0,0.7),
+      0 10px 30px -12px rgba(0,0,0,0.5),
+      inset 0 1px 0 rgba(255,255,255,0.06);
+    backdrop-filter: blur(28px) saturate(1.3);
+    -webkit-backdrop-filter: blur(28px) saturate(1.3);
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+    overflow: hidden;
+  }
+  .n4y-form-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(60% 30% at 50% -10%, rgba(255,120,80,0.08), transparent 70%);
+    pointer-events: none;
+  }
+  .n4y-form { color: #f4f0e8; position: relative; text-align: center; }
+  .n4y-form-grid { text-align: left; }
+  .n4y-hp {
+    position: absolute !important;
+    left: -9999px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  .n4y-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 1.75rem;
+  }
+  .n4y-field-full { grid-column: 1 / -1; }
+  .n4y-field { display: flex; flex-direction: column; gap: 8px; }
+  .n4y-field label {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(244,240,232,0.65);
+    font-weight: 500;
+  }
+  .n4y-field .req { color: rgba(244,240,232,0.65); margin-left: 4px; }
+  .n4y-field input {
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 10px;
+    padding: 16px 18px;
+    color: #fff;
+    font: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .n4y-field input::placeholder { color: rgba(255,255,255,0.4); }
+  .n4y-field input:hover {
+    border-color: rgba(255,255,255,0.38);
+    background: rgba(255,255,255,0.11);
+  }
+  .n4y-field input:focus {
+    outline: none;
+    border-color: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.13);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.08),
+      0 0 0 3px rgba(255,120,80,0.18);
+  }
+  .n4y-submit-wrap { margin: 0.5rem auto 0; display: inline-block; }
+  .n4y-submit.button-primary {
+    display: block;
+    font-family: system-ui, -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.111em;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .n4y-submit:disabled { opacity: 0.65; cursor: progress; }
+  .n4y-form-result {
+    margin-top: 1.25rem;
+    font-size: 0.9rem;
+    color: rgba(244,240,232,0.75);
+    letter-spacing: 0.02em;
+  }
+  .n4y-form-result:empty { margin: 0; }
+  .n4y-form-result.is-success { color: #ffb066; }
+  .n4y-form-result.is-error { color: #ff8a7a; }
+  @media (max-width: 640px) {
+    .n4y-form-card { padding: 1.5rem; border-radius: 14px; }
+    .n4y-form-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .n4y-submit { width: 100%; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var form = document.getElementById('n4y-contact-form');
+    if (!form) return;
+    var result = document.getElementById('n4y-form-result');
+    var button = form.querySelector('.n4y-submit');
+    var originalLabel = button.textContent;
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      result.className = 'n4y-form-result';
+      result.textContent = 'Sending…';
+      button.disabled = true;
+      button.textContent = 'Sending…';
+      try {
+        var response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: new FormData(form),
+        });
+        var data = await response.json();
+        if (data.success) {
+          result.textContent = 'Thanks — we’ll be in touch shortly.';
+          result.classList.add('is-success');
+          form.reset();
+          button.textContent = 'Sent';
+        } else {
+          result.textContent = data.message || 'Something went wrong. Please try again.';
+          result.classList.add('is-error');
+          button.textContent = originalLabel;
+        }
+      } catch (err) {
+        result.textContent = 'Network error. Please try again.';
+        result.classList.add('is-error');
+        button.textContent = originalLabel;
+      } finally {
+        button.disabled = false;
+      }
+    });
+  })();
+</script>

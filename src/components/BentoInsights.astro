@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+
+// Pull 3 featured posts by explicit slug order (Advertising, CX, Health)
+const featuredSlugs = ['breaking-silos', 'frictionless-cx', 'precision-and-trust'];
+const all = await getCollection('blog');
+const posts = featuredSlugs.map((slug) => all.find((p) => p.id === slug)!);
+const [primary, secondaryA, secondaryB] = posts;
+---
+
+<section id="insights" class="home-insights">
+  <div class="home-insights-head">
+    <div>
+      <div class="home-insights-eyebrow">Insights · from the studio</div>
+      <h2>Ideas that shape borderless creativity.</h2>
+    </div>
+    <a href="/blogs/" class="home-insights-cta">All insights →</a>
+  </div>
+  <div class="bento-grid">
+    <a class="bento-card bento-large" href={`/blogs/${primary.id}/`}>
+      <div class="bento-card-media"><img src={primary.data.image} alt={primary.data.imageAlt} /></div>
+      <div class="bento-card-body">
+        <span class="bento-card-tag">{primary.data.category}</span>
+        <div class="bento-card-spacer"></div>
+        <h3>{primary.data.headline}</h3>
+        <p>{primary.data.description}</p>
+        <div class="bento-card-meta">
+          <span>{primary.data.readTime}</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </div>
+      </div>
+    </a>
+    <a class="bento-card bento-small bento-a" href={`/blogs/${secondaryA.id}/`}>
+      <div class="bento-card-media"><img src={secondaryA.data.image} alt={secondaryA.data.imageAlt} /></div>
+      <div class="bento-card-body">
+        <span class="bento-card-tag">{secondaryA.data.category}</span>
+        <div class="bento-card-spacer"></div>
+        <h3>Designing the Frictionless Journey</h3>
+        <div class="bento-card-meta">
+          <span>{secondaryA.data.readTime}</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </div>
+      </div>
+    </a>
+    <a class="bento-card bento-small bento-b" href={`/blogs/${secondaryB.id}/`}>
+      <div class="bento-card-media"><img src={secondaryB.data.image} alt={secondaryB.data.imageAlt} /></div>
+      <div class="bento-card-body">
+        <span class="bento-card-tag">{secondaryB.data.category}</span>
+        <div class="bento-card-spacer"></div>
+        <h3>Precision and Trust in Healthcare Marketing</h3>
+        <div class="bento-card-meta">
+          <span>{secondaryB.data.readTime}</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>

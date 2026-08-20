@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroVideo from '../components/HeroVideo.astro';
+import ImpactSection from '../components/ImpactSection.astro';
+import LogoMarquee from '../components/LogoMarquee.astro';
+import BentoInsights from '../components/BentoInsights.astro';
+import ContactForm from '../components/ContactForm.astro';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://nova4you.com/#organization',
+      name: 'The Nova Group',
+      alternateName: 'Nova4you',
+      url: 'https://nova4you.com/',
+      logo: 'https://nova4you.com/images/Screenshot-2026-07-24-at-10.30.50-am-1.png',
+      description: 'Full-service advertising and media agency operating on the philosophy of borderless creativity.',
+      telephone: '+61-1300-926-895',
+      areaServed: 'AU',
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://nova4you.com/#website',
+      url: 'https://nova4you.com/',
+      name: 'Nova4you',
+      publisher: { '@id': 'https://nova4you.com/#organization' },
+      inLanguage: 'en-AU',
+    },
+    {
+      '@type': 'WebPage',
+      '@id': 'https://nova4you.com/#webpage',
+      url: 'https://nova4you.com/',
+      name: 'Nova4you — Borderless Creativity for Modern Brands',
+      isPartOf: { '@id': 'https://nova4you.com/#website' },
+      about: { '@id': 'https://nova4you.com/#organization' },
+      description:
+        'Full-service advertising and media agency delivering culture-changing campaigns across advertising, PR, CX, growth and specialist health marketing.',
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Nova4you — Borderless Creativity for Modern Brands"
+  description="Nova4you is a full-service advertising and media agency. We unite strategy, creative and media planning to deliver culture-changing campaigns across advertising, PR, CX, growth and specialist health marketing."
+  canonical="https://nova4you.com/"
+  keywords="advertising agency, media agency, borderless creativity, brand strategy, PR agency, customer experience, growth marketing, healthcare marketing, Nova Group"
+  ogTitle="Nova4you — Borderless Creativity for Modern Brands"
+  ogDescription="A full-service advertising and media agency. We unite strategy, creative and media planning to deliver culture-changing campaigns for ambitious brands."
+  ogImage="https://nova4you.com/images/impact-hero.jpg"
+  ogImageAlt="Nova4you — culture-changing marketing campaigns"
+  twitterDescription="Full-service advertising and media agency delivering culture-changing campaigns."
+  includeBlogCss
+  jsonLd={jsonLd}
+>
+  <link slot="head" rel="stylesheet" href="/css/home.css" />
+  <HeroVideo />
+  <ImpactSection />
+  <LogoMarquee />
+  <BentoInsights />
+  <ContactForm />
+</BaseLayout>

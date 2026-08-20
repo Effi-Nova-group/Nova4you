@@ -1,0 +1,38 @@
+---
+const capabilities = [
+  { num: '01', name: 'Advertising', tag: 'Above & below the line' },
+  { num: '02', name: 'Public Relations & Influence', tag: 'Earned & owned' },
+  { num: '03', name: 'CX & Customer Relationship Design', tag: 'Journeys & systems' },
+  { num: '04', name: 'Growth & Innovation', tag: 'Product & strategy' },
+  { num: '05', name: 'Health', tag: 'Specialist practice' },
+];
+---
+
+<section id="about" class="section impact-section">
+  <div class="impact-hero-row">
+    <div>
+      <h2 class="impact-headline-b">We inspire brands and people to create <span class="accent">impact</span>.</h2>
+    </div>
+  </div>
+  <div class="impact-intro">
+    <p>We believe real impact occurs at the intersection of talent and capability. To foster better collaboration, we have removed barriers from both our business model and operations.</p>
+    <p>We call this <span class="accent-2">borderless creativity</span> — a way of casting the right people, with the right talent, to solve the unique challenges each client faces. Unconfined by media choice or convention, it delivers effective impact wherever, whenever, and however it matters most.</p>
+  </div>
+  <div class="impact-cap-heading">
+    <span class="impact-cap-heading-label">Capabilities · 05</span>
+    <h3>Five connected disciplines.</h3>
+  </div>
+  <div class="impact-cap-list">
+    {capabilities.map((c) => (
+      <div class="impact-cap-row">
+        <div class="impact-cap-num">{c.num}</div>
+        <div class="impact-cap-name" set:html={c.name.replace('&', '&amp;')} />
+        <div class="impact-cap-tag" set:html={c.tag.replace('&', '&amp;')} />
+      </div>
+    ))}
+  </div>
+  <h3 class="impact-closer-b">
+    We do work that impacts <span class="accent">culture</span>.<br />
+    And we do work that <span class="accent">works</span>.
+  </h3>
+</section>
