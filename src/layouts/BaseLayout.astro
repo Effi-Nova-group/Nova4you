@@ -16,11 +16,13 @@ interface Props {
   twitterImage?: string;
   keywords?: string;
   robots?: string;
+  author?: string;
   jsonLd?: unknown;
   articleMeta?: {
     publishedTime: string;
     section: string;
     tags: string[];
+    author?: string;
   };
   bodyClass?: string;
   includeBlogCss?: boolean;
@@ -40,6 +42,7 @@ const {
   twitterImage,
   keywords,
   robots = 'index, follow, max-image-preview:large',
+  author = 'The Nova Group',
   jsonLd,
   articleMeta,
   bodyClass = 'body',
@@ -61,7 +64,7 @@ const finalTwitterImage = twitterImage ?? ogImage;
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta name="description" content={description} />
     {keywords && <meta name="keywords" content={keywords} />}
-    <meta name="author" content="The Nova Group" />
+    <meta name="author" content={author} />
     <meta name="robots" content={robots} />
     <meta name="theme-color" content="#050505" />
     <link rel="canonical" href={canonical} />
@@ -78,7 +81,7 @@ const finalTwitterImage = twitterImage ?? ogImage;
     {articleMeta && (
       <>
         <meta property="article:published_time" content={articleMeta.publishedTime} />
-        <meta property="article:author" content="The Nova Group" />
+        <meta property="article:author" content={articleMeta.author ?? author} />
         <meta property="article:section" content={articleMeta.section} />
         {articleMeta.tags.map((tag) => (
           <meta property="article:tag" content={tag} />

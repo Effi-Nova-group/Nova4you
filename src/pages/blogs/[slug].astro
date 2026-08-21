@@ -21,6 +21,7 @@ const { Content } = await render(post);
 
 const canonical = `https://nova4you.com/blogs/${post.id}/`;
 const publishedIso = `${post.data.publishDate.toISOString().slice(0, 10)}T00:00:00+10:00`;
+const authorName = 'Efraim Shwintarsky';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -34,7 +35,7 @@ const jsonLd = {
   articleSection: post.data.category,
   keywords: post.data.keywords,
   inLanguage: 'en-AU',
-  author: { '@type': 'Organization', name: 'The Nova Group', url: 'https://nova4you.com/' },
+  author: { '@type': 'Person', name: authorName },
   publisher: {
     '@type': 'Organization',
     name: 'The Nova Group',
@@ -63,10 +64,12 @@ const related = post.data.related
   twitterTitle={post.data.headline}
   twitterDescription={post.data.description}
   twitterImage={`https://nova4you.com${post.data.image}`}
+  author={authorName}
   articleMeta={{
     publishedTime: publishedIso,
     section: post.data.category,
     tags: post.data.tags,
+    author: authorName,
   }}
   bodyClass="blog-body body"
   includeBlogCss
@@ -77,6 +80,8 @@ const related = post.data.related
       <a href="/blogs/" class="post-back">All insights</a>
       <div class="post-meta">
         <span class="tag">{post.data.category}</span>
+        <span class="dot"></span>
+        <span>By {authorName}</span>
         <span class="dot"></span>
         <span>{post.data.readTime}</span>
       </div>
