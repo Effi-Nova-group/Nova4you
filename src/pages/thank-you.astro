@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Thanks — Nova4you"
+  description="Thanks for reaching out to Nova4you. One of our strategists will be in touch shortly."
+  canonical="https://nova4you.com/thank-you/"
+  robots="noindex, follow"
+  ogTitle="Thanks — Nova4you"
+  ogDescription="Thanks for reaching out. One of our strategists will be in touch shortly."
+>
+  <section class="thank-you-section">
+    <div class="thank-you-inner">
+      <div class="thank-you-eyebrow">Message received</div>
+      <h1 class="thank-you-heading">Thanks — we've got your message.</h1>
+      <p class="thank-you-copy">
+        One of our strategists will be in touch shortly. In the meantime, feel free
+        to explore more of our thinking.
+      </p>
+      <div class="thank-you-actions">
+        <div class="button-primary-gradient header-button">
+          <a href="/" class="button-primary small-v2 w-button">Back to home</a>
+        </div>
+        <a href="/blogs/" class="thank-you-secondary">Read our insights →</a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .thank-you-section {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8rem 6vw;
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      color: #f4f0e8;
+      text-align: center;
+    }
+    .thank-you-inner {
+      max-width: 640px;
+    }
+    .thank-you-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(244, 240, 232, 0.6);
+      font-weight: 500;
+      margin-bottom: 32px;
+      justify-content: center;
+    }
+    .thank-you-eyebrow::before,
+    .thank-you-eyebrow::after {
+      content: "";
+      width: 32px;
+      height: 1px;
+      background: linear-gradient(115deg, #ff3d2e 0%, #ff9a2e 100%);
+    }
+    .thank-you-heading {
+      margin: 0 0 20px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: #f4f0e8;
+    }
+    .thank-you-copy {
+      margin: 0 0 40px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: rgba(244, 240, 232, 0.72);
+      font-weight: 300;
+    }
+    .thank-you-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .thank-you-secondary {
+      color: rgba(244, 240, 232, 0.72);
+      text-decoration: none;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      border-bottom: 1px solid rgba(244, 240, 232, 0.3);
+      padding-bottom: 4px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .thank-you-secondary:hover {
+      color: #ff9a2e;
+      border-color: #ff9a2e;
+    }
+    @media (max-width: 640px) {
+      .thank-you-section { padding: 5rem 5vw; }
+    }
+  </style>
+</BaseLayout>

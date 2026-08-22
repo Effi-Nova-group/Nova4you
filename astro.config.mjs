@@ -7,7 +7,7 @@ export default defineConfig({
   site: 'https://nova4you.com',
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/401') && !page.includes('/404'),
+      filter: (page) => !page.includes('/401') && !page.includes('/404') && !page.includes('/thank-you'),
     }),
   ],
   build: {

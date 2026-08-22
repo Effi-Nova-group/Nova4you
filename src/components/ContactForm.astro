@@ -19,6 +19,7 @@
               <input type="hidden" name="access_key" value="ab2c7e18-bf19-443f-adef-05331026e90f" />
               <input type="hidden" name="subject" value="New strategy call request — nova4you.com" />
               <input type="hidden" name="from_name" value="Nova4you Website" />
+              <input type="hidden" name="redirect" value="https://nova4you.com/thank-you/" />
               <input type="checkbox" name="botcheck" class="n4y-hp" tabindex="-1" autocomplete="off" />
               <div class="n4y-form-grid">
                 <div class="n4y-field">
@@ -182,21 +183,18 @@
         });
         var data = await response.json();
         if (data.success) {
-          result.textContent = 'Thanks — we’ll be in touch shortly.';
-          result.classList.add('is-success');
-          form.reset();
-          button.textContent = 'Sent';
-        } else {
-          result.textContent = data.message || 'Something went wrong. Please try again.';
-          result.classList.add('is-error');
-          button.textContent = originalLabel;
+          window.location.assign('/thank-you/');
+          return;
         }
+        result.textContent = data.message || 'Something went wrong. Please try again.';
+        result.classList.add('is-error');
+        button.textContent = originalLabel;
       } catch (err) {
         result.textContent = 'Network error. Please try again.';
         result.classList.add('is-error');
         button.textContent = originalLabel;
       } finally {
-        button.disabled = false;
+        if (!location.pathname.endsWith('/thank-you/')) button.disabled = false;
       }
     });
   })();
