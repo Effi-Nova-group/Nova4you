@@ -1,0 +1,264 @@
+---
+// Reusable international phone field.
+//
+// Renders a `.n4y-field` matching the rest of the form, upgraded by
+// intl-tel-input into a flag + dial-code selector with a searchable country
+// dropdown. Drop it into any form; the shared script below picks up every
+// `[data-n4y-phone]` on the page and normalises the submitted value to E.164
+// (e.g. +61412345678) no matter how that form handles its own submit.
+
+interface Props {
+  /** Input id, also used by the label's `for`. Must be unique per page. */
+  id?: string;
+  /** Submitted field name. */
+  name?: string;
+  label?: string;
+  required?: boolean;
+  /** ISO 3166-1 alpha-2, lowercase. Sets the default flag and dial code. */
+  initialCountry?: string;
+  /** Extra classes on the wrapping `.n4y-field`, e.g. "n4y-field-full". */
+  fieldClass?: string;
+}
+
+const {
+  id = 'n4y-phone',
+  name = 'phone',
+  label = 'Phone Number',
+  required = true,
+  initialCountry = 'au',
+  fieldClass = '',
+} = Astro.props;
+---
+
+<div class:list={['n4y-field', 'n4y-phone-field', fieldClass]}>
+  <label for={id}>{label}{required && <span class="req">*</span>}</label>
+  <input
+    id={id}
+    type="tel"
+    name={name}
+    autocomplete="tel"
+    required={required}
+    data-n4y-phone
+    data-initial-country={initialCountry}
+  />
+</div>
+
+<style is:global>
+  /* intl-tel-input renders its dropdown outside this component (and, on mobile,
+     detached to <body>), so these overrides are global by necessity. The library
+     is only used by PhoneField, so theming `.iti__*` site-wide is safe. */
+  :root {
+    --iti-border-color: rgba(255, 255, 255, 0.14);
+    --iti-country-selector-bg: #17100f;
+    --iti-hover-color: rgba(255, 255, 255, 0.09);
+    --iti-icon-color: rgba(244, 240, 232, 0.55);
+    --iti-spacer-horizontal: 14px;
+    --iti-arrow-padding: 8px;
+    --iti-flag-width: 22px;
+    --iti-mobile-popup-margin: 20px;
+  }
+
+  /* The injected wrapper must fill the field column rather than shrink-wrap. */
+  .n4y-phone-field .iti {
+    display: block;
+    width: 100%;
+  }
+
+  /* Selected-country button: flag + caret sitting inside the input's left edge. */
+  .n4y-phone-field .iti__selected-country {
+    color: #fff;
+    font-family: inherit;
+    border-radius: 10px 0 0 10px;
+  }
+  .n4y-phone-field .iti__selected-country-primary {
+    border-radius: 10px 0 0 10px;
+    transition: background-color 0.2s ease;
+  }
+  /* Hairline between the selector and the number, echoing the input border. */
+  .n4y-phone-field .iti__country-container::after {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    right: 0;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.16);
+    pointer-events: none;
+  }
+  .n4y-phone-field .iti__selected-country:focus-visible .iti__selected-country-primary {
+    outline: 2px solid rgba(255, 160, 110, 0.8);
+    outline-offset: -2px;
+  }
+
+  /* Dropdown panel. Matches the form card: dark, warm-tinted, soft border. */
+  .iti__country-selector {
+    border-radius: 12px;
+    overflow: hidden;
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+    font-size: 0.95rem;
+    color: #f4f0e8;
+    background-image: radial-gradient(90% 60% at 0% 0%, rgba(255, 90, 50, 0.10), transparent 65%);
+  }
+  .iti--inline-country-selector .iti__country-selector {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow:
+      0 26px 50px -18px rgba(0, 0, 0, 0.85),
+      0 6px 18px -10px rgba(0, 0, 0, 0.6);
+  }
+
+  /* Search box at the top of the list. */
+  .iti__search-input {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    font: inherit;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-radius: 0;
+  }
+  .iti__search-input::placeholder { color: rgba(255, 255, 255, 0.42); }
+  .iti__search-input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.09);
+  }
+  .iti__search-input-wrapper { border-bottom-color: rgba(255, 255, 255, 0.12); }
+
+  /* Country rows: flag, name, then dial code pushed to the right. */
+  .iti__country {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #f4f0e8;
+  }
+  .iti__country-list { max-height: 260px; }
+  .iti--inline-country-selector .iti__country-list { max-height: 240px; }
+  /* The dial code is nested *inside* the country name span, so the library's
+     flex-grow on the name can't separate them — make the name the flex row. */
+  .iti__country-name {
+    display: flex;
+    align-items: baseline;
+    min-width: 0;
+  }
+  .iti__dial-code {
+    color: rgba(244, 240, 232, 0.5);
+    margin-left: auto;
+    padding-left: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+  .iti__country.iti__highlight .iti__dial-code { color: rgba(244, 240, 232, 0.75); }
+  .iti__no-results { color: rgba(244, 240, 232, 0.5); }
+
+  /* Scrollbar, so the list doesn't get a bright default one on the dark panel. */
+  .iti__country-list {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
+  }
+  .iti__country-list::-webkit-scrollbar { width: 8px; }
+  .iti__country-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 4px;
+  }
+
+  /* Mobile: the library switches to a centred fullscreen popup. */
+  .iti--fullscreen-popup.iti--detached-country-selector {
+    background-color: rgba(0, 0, 0, 0.72);
+    justify-content: center;
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+  }
+  .iti--fullscreen-popup .iti__country-selector {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.9);
+  }
+  .iti--fullscreen-popup .iti__search-input { font-size: 1rem; }
+</style>
+
+<script>
+  import intlTelInput from 'intl-tel-input';
+  import 'intl-tel-input/styles';
+
+  const inputs = document.querySelectorAll<HTMLInputElement>('input[data-n4y-phone]');
+
+  // The library hardcodes the list's dial codes as "(+93)"; the design calls
+  // for a bare "+93". The inline dropdown builds its list once, but the mobile
+  // fullscreen popup rebuilds it on every open, so re-run this each time the
+  // selector expands. The regex only matches the bracketed form, so repeat
+  // calls are harmless.
+  const stripDialCodeParens = () => {
+    document.querySelectorAll('.iti__dial-code').forEach((el) => {
+      el.textContent = (el.textContent || '').replace(/^\((\+\d+)\)$/, '$1');
+    });
+  };
+
+  inputs.forEach((input) => {
+    intlTelInput(input, {
+      initialCountry: (input.dataset.initialCountry || 'au') as any,
+      countrySearch: true,
+      formatAsYouType: true,
+      // v29 defaults this to true, which renders "flag ⌄ +61" in the selector
+      // and drops the national prefix from the placeholder ("412 345 678").
+      // We want just flag + caret, and the local form "0412 345 678".
+      separateDialCode: false,
+      // Show the number the way people write it locally; getNumber() still
+      // yields E.164 for submission.
+      numberDisplayFormat: 'NATIONAL',
+      placeholderNumberPolicy: 'AGGRESSIVE',
+      placeholderNumberType: 'MOBILE',
+      loadUtils: () => import('intl-tel-input/utils') as any,
+      classNames: {
+        container: 'n4y-iti',
+        countrySelectorContainer: 'n4y-iti-popup',
+      },
+    });
+
+    // Covers the inline dropdown, whose list exists from init.
+    stripDialCodeParens();
+
+    // Covers the fullscreen popup, which is built fresh on each open. Watching
+    // aria-expanded catches both pointer and keyboard opens; the callback runs
+    // after the library's synchronous open(), so the list is fully rendered.
+    const selectedCountry = input.parentElement?.querySelector('.iti__selected-country');
+    if (selectedCountry) {
+      new MutationObserver(stripDialCodeParens).observe(selectedCountry, {
+        attributes: true,
+        attributeFilter: ['aria-expanded'],
+      });
+    }
+  });
+
+  // Submit the full international number (+61412345678) rather than the local
+  // one shown in the box. Registered in the capture phase on `document` so it
+  // always runs before a form's own submit handler builds its FormData —
+  // capture on an ancestor precedes the target phase, whatever the load order.
+  if (inputs.length) {
+    document.addEventListener(
+      'submit',
+      (event) => {
+        const form = event.target as HTMLFormElement | null;
+        if (!(form instanceof HTMLFormElement)) return;
+
+        form.querySelectorAll<HTMLInputElement>('input[data-n4y-phone]').forEach((input) => {
+          const iti = intlTelInput.getInstance(input);
+          if (!iti || !input.value.trim()) return;
+
+          const display = input.value;
+          // getNumber() needs the utils script; fall back to a manual prefix if
+          // it hasn't landed yet so we never submit a bare local number.
+          let full = iti.getNumber();
+          if (!full) {
+            const dialCode = iti.getSelectedCountry()?.dialCode;
+            const digits = display.replace(/\D/g, '').replace(/^0+/, '');
+            if (dialCode && digits) full = `+${dialCode}${digits}`;
+          }
+          if (!full) return;
+
+          input.value = full;
+          // Restore what the user typed once FormData has been read, so a
+          // failed submit doesn't leave raw E.164 sitting in the field.
+          setTimeout(() => {
+            if (input.value === full) input.value = display;
+          }, 0);
+        });
+      },
+      true,
+    );
+  }
+</script>

@@ -1,5 +1,6 @@
 ---
 // Web3Forms strategy call form
+import PhoneField from './PhoneField.astro';
 ---
 
 <section id="contact" class="section_contact contact-full">
@@ -38,10 +39,7 @@
                   <label for="n4y-company">Company Name<span class="req">*</span></label>
                   <input id="n4y-company" type="text" name="company" autocomplete="organization" required />
                 </div>
-                <div class="n4y-field">
-                  <label for="n4y-phone">Phone Number<span class="req">*</span></label>
-                  <input id="n4y-phone" type="tel" name="phone" autocomplete="tel" required />
-                </div>
+                <PhoneField id="n4y-phone" name="phone" label="Phone Number" initialCountry="au" />
               </div>
               <div class="button-primary-gradient header-button n4y-submit-wrap">
                 <button type="submit" class="button-primary small-v2 w-button n4y-submit">Book a Strategy Call</button>
@@ -106,7 +104,7 @@
     font-weight: 500;
   }
   .n4y-field .req { color: rgba(244,240,232,0.65); margin-left: 4px; }
-  .n4y-field input {
+  .n4y-field input:not(.iti__search-input) {
     width: 100%;
     background: rgba(255,255,255,0.08);
     border: 1px solid rgba(255,255,255,0.22);
@@ -121,12 +119,12 @@
     -webkit-appearance: none;
     appearance: none;
   }
-  .n4y-field input::placeholder { color: rgba(255,255,255,0.4); }
-  .n4y-field input:hover {
+  .n4y-field input:not(.iti__search-input)::placeholder { color: rgba(255,255,255,0.4); }
+  .n4y-field input:not(.iti__search-input):hover {
     border-color: rgba(255,255,255,0.38);
     background: rgba(255,255,255,0.11);
   }
-  .n4y-field input:focus {
+  .n4y-field input:not(.iti__search-input):focus {
     outline: none;
     border-color: rgba(255,255,255,0.6);
     background: rgba(255,255,255,0.13);

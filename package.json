@@ -14,7 +14,8 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
     "astro": "^7.2.4",
-    "@astrojs/sitemap": "^3.7.3"
+    "intl-tel-input": "^29.2.3"
   }
 }
