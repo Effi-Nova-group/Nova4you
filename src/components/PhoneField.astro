@@ -202,6 +202,11 @@ const {
       numberDisplayFormat: 'NATIONAL',
       placeholderNumberPolicy: 'AGGRESSIVE',
       placeholderNumberType: 'MOBILE',
+      // The form card sets overflow:hidden for its rounded corners and
+      // gradient overlay, which clips an inline dropdown. Rendering it on
+      // <body> escapes that. Ignored for the mobile fullscreen popup, which
+      // already detaches itself.
+      dropdownParent: document.body,
       loadUtils: () => import('intl-tel-input/utils') as any,
       classNames: {
         container: 'n4y-iti',
