@@ -10,31 +10,64 @@
   z-index: 1;
 }
 
-/* Block 01 — Hero headline responsive overrides */
-.heading-hero-text {
-  padding-right: 24px;
-  max-width: calc(100% - 40px);
-  word-break: break-word;
-  overflow-wrap: anywhere;
-  hyphens: auto;
-  box-sizing: border-box;
+/* Block 01 — Hero YouTube background video */
+.youtube-hero-video {
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
 }
-@media (max-width: 991px) {
-  .heading-hero-text {
-    text-align: left;
-    left: 0;
-    right: auto;
-    margin: auto auto 32px 24px;
-    max-width: calc(100vw - 48px);
-    font-size: clamp(2.25rem, 9vw, 4rem);
-    line-height: 1.02;
-  }
+.youtube-hero-video_iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 178vh; /* 16:9 scaled to always cover the viewport height */
+  height: 100vh;
+  min-width: 100%;
+  min-height: 56.25vw; /* 16:9 scaled to always cover the viewport width */
+  transform: translate(-50%, -50%) scale(1.4);
+  pointer-events: none;
+  border: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.youtube-hero-video_iframe.is-loaded {
+  opacity: 1;
+}
+.youtube-hero-video_mute-toggle {
+  position: absolute;
+  z-index: 3;
+  bottom: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 50%;
+  background: rgba(0,0,0,0.35);
+  color: #fff;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.youtube-hero-video_mute-toggle:hover {
+  background: rgba(0,0,0,0.55);
+  border-color: rgba(255,255,255,0.7);
+}
+.youtube-hero-video_mute-toggle .icon-unmuted {
+  display: none;
+}
+.youtube-hero-video_mute-toggle.is-unmuted .icon-muted {
+  display: none;
+}
+.youtube-hero-video_mute-toggle.is-unmuted .icon-unmuted {
+  display: block;
 }
 @media (max-width: 479px) {
-  .heading-hero-text {
-    margin: auto auto 28px 20px;
-    max-width: calc(100vw - 40px);
-    font-size: clamp(2rem, 11vw, 3.25rem);
+  .youtube-hero-video_mute-toggle {
+    bottom: 16px;
+    right: 16px;
   }
 }
 
