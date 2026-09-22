@@ -9,7 +9,7 @@ const YOUTUBE_ID = "ajZ6FcuYqf0";
     class="header_background-image youtube-hero-video"
     style={`background-image:url(https://i.ytimg.com/vi/${YOUTUBE_ID}/hqdefault.jpg)`}
   >
-    <div id="hero-youtube-player" class="youtube-hero-video_iframe" data-video-id={YOUTUBE_ID} data-yt-mount></div>
+    <div id="hero-youtube-player" data-video-id={YOUTUBE_ID}></div>
   </div>
   <button
     id="hero-mute-toggle"
@@ -63,19 +63,18 @@ const YOUTUBE_ID = "ajZ6FcuYqf0";
           disablekb: 1,
           fs: 0,
           playsinline: 1,
-          loop: 1,
-          playlist: videoId,
           origin: window.location.origin,
         },
         events: {
           onReady: (event: any) => {
-            event.target.getIframe()?.classList.add("is-loaded", "youtube-hero-video_iframe");
+            event.target.getIframe()?.classList.add("is-loaded");
             event.target.mute();
             event.target.playVideo();
           },
           onStateChange: (event: any) => {
-            // Belt-and-braces loop in case the playlist trick doesn't take —
-            // avoids YouTube falling through to its end-screen suggestions grid.
+            // Loop manually instead of via loop+playlist params: that combo
+            // puts the player into "playlist mode", which shows prev/next
+            // controls we can't otherwise suppress.
             if (event.data === window.YT.PlayerState.ENDED) {
               event.target.seekTo(0);
               event.target.playVideo();

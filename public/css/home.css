@@ -15,8 +15,13 @@
   overflow: hidden;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
 }
-.youtube-hero-video_iframe {
+/* Styled by ID, not class: the YouTube IFrame API replaces #hero-youtube-player
+   with a new <iframe> that keeps the same id but drops any classes, and this
+   must apply from first paint (no JS timing dependency) or the unstyled
+   iframe briefly renders at its native small size in the top-left corner. */
+#hero-youtube-player {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -30,7 +35,7 @@
   opacity: 0;
   transition: opacity 0.6s ease;
 }
-.youtube-hero-video_iframe.is-loaded {
+#hero-youtube-player.is-loaded {
   opacity: 1;
 }
 .youtube-hero-video_mute-toggle {
