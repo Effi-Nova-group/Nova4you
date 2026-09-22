@@ -7,19 +7,9 @@ const YOUTUBE_ID = "ajZ6FcuYqf0";
   <div id="canvas" class="canvas"></div>
   <div
     class="header_background-image youtube-hero-video"
-    style={`background-image:url(https://i.ytimg.com/vi/${YOUTUBE_ID}/maxresdefault.jpg)`}
+    style={`background-image:url(https://i.ytimg.com/vi/${YOUTUBE_ID}/hqdefault.jpg)`}
   >
-    <iframe
-      id="hero-youtube-iframe"
-      class="youtube-hero-video_iframe"
-      src={`https://www.youtube-nocookie.com/embed/${YOUTUBE_ID}?autoplay=1&mute=1&loop=1&playlist=${YOUTUBE_ID}&controls=0&modestbranding=1&rel=0&iv_load_policy=3&cc_load_policy=0&disablekb=1&fs=0&playsinline=1&enablejsapi=1`}
-      title="Hero background video"
-      frameborder="0"
-      allow="autoplay; encrypted-media"
-      allowfullscreen
-      loading="eager"
-      onload="this.classList.add('is-loaded')"
-    ></iframe>
+    <div id="hero-youtube-player" class="youtube-hero-video_iframe" data-video-id={YOUTUBE_ID} data-yt-mount></div>
   </div>
   <button
     id="hero-mute-toggle"
@@ -45,19 +35,79 @@ const YOUTUBE_ID = "ajZ6FcuYqf0";
 </main>
 
 <script>
-  const iframe = document.getElementById("hero-youtube-iframe") as HTMLIFrameElement | null;
-  const toggle = document.getElementById("hero-mute-toggle");
+  declare global {
+    interface Window {
+      onYouTubeIframeAPIReady?: () => void;
+      YT?: any;
+    }
+  }
 
-  if (iframe && toggle) {
+  const mount = document.getElementById("hero-youtube-player");
+  const toggle = document.getElementById("hero-mute-toggle");
+  if (mount && toggle) {
+    const videoId = mount.dataset.videoId as string;
+    let player: any = null;
     let muted = true;
 
-    const postCommand = (func: string) => {
-      iframe.contentWindow?.postMessage(JSON.stringify({ event: "command", func, args: [] }), "*");
+    const createPlayer = () => {
+      player = new window.YT.Player(mount, {
+        videoId,
+        playerVars: {
+          autoplay: 1,
+          mute: 1,
+          controls: 0,
+          modestbranding: 1,
+          rel: 0,
+          iv_load_policy: 3,
+          cc_load_policy: 0,
+          disablekb: 1,
+          fs: 0,
+          playsinline: 1,
+          loop: 1,
+          playlist: videoId,
+          origin: window.location.origin,
+        },
+        events: {
+          onReady: (event: any) => {
+            event.target.getIframe()?.classList.add("is-loaded", "youtube-hero-video_iframe");
+            event.target.mute();
+            event.target.playVideo();
+          },
+          onStateChange: (event: any) => {
+            // Belt-and-braces loop in case the playlist trick doesn't take —
+            // avoids YouTube falling through to its end-screen suggestions grid.
+            if (event.data === window.YT.PlayerState.ENDED) {
+              event.target.seekTo(0);
+              event.target.playVideo();
+            }
+          },
+        },
+      });
     };
 
+    if (window.YT && window.YT.Player) {
+      createPlayer();
+    } else {
+      const existingCallback = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = () => {
+        existingCallback?.();
+        createPlayer();
+      };
+      if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
+        const tag = document.createElement("script");
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.head.appendChild(tag);
+      }
+    }
+
     toggle.addEventListener("click", () => {
+      if (!player) return;
       muted = !muted;
-      postCommand(muted ? "mute" : "unMute");
+      if (muted) {
+        player.mute();
+      } else {
+        player.unMute();
+      }
       toggle.classList.toggle("is-unmuted", !muted);
       toggle.setAttribute("aria-pressed", String(!muted));
       toggle.setAttribute("aria-label", muted ? "Unmute video" : "Mute video");
