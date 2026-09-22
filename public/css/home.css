@@ -10,35 +10,29 @@
   z-index: 1;
 }
 
-/* Block 01 — Hero YouTube background video */
-.youtube-hero-video {
+/* Block 01 — Hero YouTube background video
+   Matches the pattern used across the other Nova Group sites: a plain
+   iframe overscaled with fixed vw/vh units + a modest scale() to crop
+   YouTube's chrome, no poster-image layer (avoids background-repeat
+   pitfalls entirely), styled by ID so sizing applies from first paint. */
+.hero-video-wrap {
+  position: absolute;
+  inset: 0;
   overflow: hidden;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  pointer-events: none;
 }
-/* Styled by ID, not class: the YouTube IFrame API replaces #hero-youtube-player
-   with a new <iframe> that keeps the same id but drops any classes, and this
-   must apply from first paint (no JS timing dependency) or the unstyled
-   iframe briefly renders at its native small size in the top-left corner. */
-#hero-youtube-player {
+.hero-video-wrap #hero-yt-player {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 178vh; /* 16:9 scaled to always cover the viewport height */
-  height: 100vh;
-  min-width: 100%;
-  min-height: 56.25vw; /* 16:9 scaled to always cover the viewport width */
-  transform: translate(-50%, -50%) scale(1.4);
-  pointer-events: none;
+  width: 100vw;
+  height: 56.25vw; /* 16:9 */
+  min-height: 130vh;
+  min-width: 231vh; /* 16:9 at 130vh */
+  transform: translate(-50%, -50%) scale(1.15);
   border: 0;
-  opacity: 0;
-  transition: opacity 0.6s ease;
 }
-#hero-youtube-player.is-loaded {
-  opacity: 1;
-}
-.youtube-hero-video_mute-toggle {
+.hero-mute-toggle {
   position: absolute;
   z-index: 3;
   bottom: 24px;
@@ -56,21 +50,24 @@
   backdrop-filter: blur(4px);
   transition: background 0.2s ease, border-color 0.2s ease;
 }
-.youtube-hero-video_mute-toggle:hover {
+.hero-mute-toggle:hover {
   background: rgba(0,0,0,0.55);
   border-color: rgba(255,255,255,0.7);
 }
-.youtube-hero-video_mute-toggle .icon-unmuted {
+.hero-mute-toggle .icon-unmuted {
   display: none;
 }
-.youtube-hero-video_mute-toggle.is-unmuted .icon-muted {
+.hero-mute-toggle.is-muted .icon-unmuted {
   display: none;
 }
-.youtube-hero-video_mute-toggle.is-unmuted .icon-unmuted {
+.hero-mute-toggle:not(.is-muted) .icon-muted {
+  display: none;
+}
+.hero-mute-toggle:not(.is-muted) .icon-unmuted {
   display: block;
 }
 @media (max-width: 479px) {
-  .youtube-hero-video_mute-toggle {
+  .hero-mute-toggle {
     bottom: 16px;
     right: 16px;
   }
