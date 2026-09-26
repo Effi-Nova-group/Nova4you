@@ -13,7 +13,7 @@ const YOUTUBE_ID = "ajZ6FcuYqf0";
   <div class="header_background-image hero-video-wrap">
     <iframe
       id="hero-yt-player"
-      src={`https://www.youtube-nocookie.com/embed/${YOUTUBE_ID}?autoplay=1&mute=1&controls=0&disablekb=1&fs=0&iv_load_policy=3&modestbranding=1&playsinline=1&rel=0&showinfo=0&enablejsapi=1`}
+      src={`https://www.youtube-nocookie.com/embed/${YOUTUBE_ID}?autoplay=1&mute=1&controls=0&disablekb=1&fs=0&iv_load_policy=3&modestbranding=1&playsinline=1&rel=0&showinfo=0&enablejsapi=1&cc_load_policy=0`}
       title="Hero background video"
       frameborder="0"
       allow="autoplay; encrypted-media"
@@ -67,6 +67,7 @@ const YOUTUBE_ID = "ajZ6FcuYqf0";
   iframe?.addEventListener("load", () => {
     sendCommand("addEventListener", ["onStateChange"]);
     sendCommand("setPlaybackQuality", ["hd1080"]);
+    sendCommand("unloadModule", ["captions"]);
   });
 
   window.addEventListener("message", (event) => {
