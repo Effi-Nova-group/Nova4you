@@ -64,10 +64,16 @@ const YOUTUBE_ID = "ajZ6FcuYqf0";
     updateToggle();
   });
 
+  const killCaptions = () => {
+    sendCommand("unloadModule", ["captions"]);
+    sendCommand("setOption", ["captions", "track", {}]);
+  };
+
   iframe?.addEventListener("load", () => {
     sendCommand("addEventListener", ["onStateChange"]);
+    sendCommand("addEventListener", ["onApiChange"]);
     sendCommand("setPlaybackQuality", ["hd1080"]);
-    sendCommand("unloadModule", ["captions"]);
+    killCaptions();
   });
 
   window.addEventListener("message", (event) => {
@@ -84,6 +90,10 @@ const YOUTUBE_ID = "ajZ6FcuYqf0";
     }
     if (data.event === "onStateChange" && data.info === 1) {
       sendCommand("setPlaybackQuality", ["hd1080"]);
+      killCaptions();
+    }
+    if (data.event === "onApiChange") {
+      killCaptions();
     }
   });
 </script>
