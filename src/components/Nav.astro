@@ -71,37 +71,75 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
     .header .header-navigation.site-nav { gap: 24px; }
   }
 
-  /* Narrow enough that logo + links + CTA can't share a line without the CTA
-     label breaking. Wrap the links onto their own centred row underneath. */
-  /* Grid rather than flex-wrap: a wrapping flex row breaks items onto new lines
-     before it shrinks them, which would drop the CTA below the logo. The grid
-     pins logo and CTA to row one and gives the links a row of their own, while
-     minmax(0, 1fr) lets the logo scale down to whatever width is left. */
+  /* --- Mobile hamburger ---------------------------------------------------
+     This is our own button and panel rather than Webflow's .w-nav-button /
+     .w-nav-menu pair: that machinery drives the stock menu (which this site
+     hides) and its over-left animation, neither of which we want here. */
+  .header .n4y-burger { display: none; }
+  .header .n4y-mobile-nav { display: none; }
+
   @media screen and (max-width: 860px) {
-    .header .header-wrapper {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      grid-template-areas:
-        "logo cta"
-        "nav  nav";
-      align-items: center;
-      column-gap: 12px;
-      row-gap: 10px;
-    }
-    .header .split-content.header-right { grid-area: logo; min-width: 0; }
+    /* Logo and CTA share row one with the burger; the inline links move into
+       the panel. Let the logo scale to whatever width is left over. */
+    .header .split-content.header-center { display: none !important; }
+    .header .header-wrapper { gap: 12px; }
+    .header .split-content.header-right { flex: 0 1 auto; min-width: 0; }
     .header .split-content.header-right .header-logo { max-width: 100%; height: auto; }
-    .header .split-content.header-left { grid-area: cta; margin-right: 0; }
-    /* width:100%, not justify-self: the item's used width resolves from the
-       Webflow flex rules and doesn't stretch to the area on its own, which
-       parks the links against the right edge. */
-    .header .split-content.header-center {
-      grid-area: nav;
-      width: 100%;
+    .header .split-content.header-left { flex: 0 0 auto; }
+
+    .header .n4y-burger {
+      display: inline-flex;
+      flex: 0 0 auto;
+      flex-direction: column;
       justify-content: center;
-      margin-right: 0;
+      gap: 5px;
+      width: 44px;
+      height: 44px;
+      padding: 0 9px;
+      margin: 0;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
     }
-    .header .header-navigation.site-nav { gap: 28px; }
-    .header .header-navigation.site-nav .nav-link { font-size: 0.95rem; }
+    .header .n4y-burger__bar {
+      display: block;
+      width: 100%;
+      height: 2px;
+      border-radius: 2px;
+      background: #fff;
+      transition: transform 0.25s ease, opacity 0.2s ease;
+    }
+    /* Bars sit at 0 / 7 / 14px, so ±7px brings the outer two to the middle. */
+    .header .n4y-burger[aria-expanded='true'] .n4y-burger__bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .header .n4y-burger[aria-expanded='true'] .n4y-burger__bar:nth-child(2) { opacity: 0; }
+    .header .n4y-burger[aria-expanded='true'] .n4y-burger__bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .header .n4y-mobile-nav[data-open='true'] { display: block; }
+    .header .n4y-mobile-nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #0a0a0a;
+      border-top: 1px solid rgba(244, 240, 232, 0.1);
+      box-shadow: 0 28px 56px -28px rgba(0, 0, 0, 0.95);
+      padding: 4px 6vw 12px;
+    }
+    .header .n4y-mobile-nav__list { list-style: none; margin: 0; padding: 0; }
+    .header .n4y-mobile-nav__link {
+      display: block;
+      padding: 18px 0;
+      font-size: 1.05rem;
+      color: rgba(244, 240, 232, 0.75);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(244, 240, 232, 0.08);
+      transition: color 0.2s ease;
+    }
+    .header .n4y-mobile-nav__link:hover,
+    .header .n4y-mobile-nav__link:focus-visible { color: #fff; }
+    .header .n4y-mobile-nav__link[aria-current='page'] { color: #fff; font-weight: 600; }
+    .header .n4y-mobile-nav__list li:last-child .n4y-mobile-nav__link { border-bottom: 0; }
   }
 </style>
 
@@ -187,7 +225,65 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
             </div>
           </div>
         </div>
+        <button
+          type="button"
+          class="n4y-burger"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="n4y-mobile-nav"
+        >
+          <span class="n4y-burger__bar"></span>
+          <span class="n4y-burger__bar"></span>
+          <span class="n4y-burger__bar"></span>
+        </button>
       </div>
     </div>
   </div>
+
+  <nav id="n4y-mobile-nav" class="n4y-mobile-nav" data-open="false" aria-label="Mobile">
+    <ul class="n4y-mobile-nav__list">
+      <li>
+        <a href="/case-studies/" class="n4y-mobile-nav__link" aria-current={isCurrent('/case-studies') ? 'page' : undefined}>Case Studies</a>
+      </li>
+      <li>
+        <a href="/blogs/" class="n4y-mobile-nav__link" aria-current={isCurrent('/blogs') ? 'page' : undefined}>Blog</a>
+      </li>
+    </ul>
+  </nav>
 </div>
+
+<script>
+  const burger = document.querySelector<HTMLButtonElement>('.n4y-burger');
+  const panel = document.getElementById('n4y-mobile-nav');
+
+  if (burger && panel) {
+    const setOpen = (open: boolean) => {
+      burger.setAttribute('aria-expanded', String(open));
+      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      panel.setAttribute('data-open', String(open));
+    };
+
+    burger.addEventListener('click', () => {
+      setOpen(burger.getAttribute('aria-expanded') !== 'true');
+    });
+
+    // Close after following a link — same-page anchors don't reload the panel away.
+    panel.addEventListener('click', (event) => {
+      if ((event.target as HTMLElement).closest('a')) setOpen(false);
+    });
+
+    document.addEventListener('click', (event) => {
+      const target = event.target as Node;
+      if (!panel.contains(target) && !burger.contains(target)) setOpen(false);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    });
+
+    // Leaving mobile widths with the panel open would otherwise strand it open.
+    window.matchMedia('(min-width: 861px)').addEventListener('change', (event) => {
+      if (event.matches) setOpen(false);
+    });
+  }
+</script>
