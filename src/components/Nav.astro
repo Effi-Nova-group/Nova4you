@@ -1,5 +1,9 @@
 ---
 // Shared site header (Webflow nav)
+
+// Trailing-slash-insensitive current-section match for nav highlighting
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`);
 ---
 
 <style is:global>
@@ -23,6 +27,82 @@
   @media screen and (max-width: 479px) {
     .header .button-primary.small-v2 { padding: 12px 20px; font-size: 0.95rem; }
   }
+
+  /* --- Case Studies / Blog links ------------------------------------------
+     .header-navigation.none hides the stock Webflow menu, so these live in
+     their own list. The current page reads at full strength, the rest muted. */
+  .header .header-navigation.site-nav {
+    display: flex;
+    /* nova4you.webflow.css flips .header-navigation to column below 992px for the
+       collapsed Webflow panel. This list isn't in that panel, so hold it to a row. */
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .header .header-navigation.site-nav .nav-item-wrapper { margin: 0; }
+  .header .header-navigation.site-nav .nav-link {
+    color: rgba(244, 240, 232, 0.65);
+    white-space: nowrap;
+    transition: color 0.2s ease;
+  }
+  .header .header-navigation.site-nav .nav-link:hover,
+  .header .header-navigation.site-nav .nav-link:focus-visible { color: #fff; }
+  .header .header-navigation.site-nav .nav-link[aria-current='page'] { color: #fff; font-weight: 600; }
+
+  /* .header-wrapper is a space-between flex row (logo | links | CTA). Equal gaps
+     push the links off true centre because the logo and the CTA button are
+     different widths, so pin the link group to the centre instead. */
+  @media screen and (min-width: 992px) {
+    .header .header-wrapper { position: relative; }
+    .header .split-content.header-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Below the Webflow collapse point the links sit inline between the logo and
+     the CTA, so step the gap down to keep the row on one line. */
+  @media screen and (max-width: 991px) {
+    .header .header-navigation.site-nav { gap: 24px; }
+  }
+
+  /* Narrow enough that logo + links + CTA can't share a line without the CTA
+     label breaking. Wrap the links onto their own centred row underneath. */
+  /* Grid rather than flex-wrap: a wrapping flex row breaks items onto new lines
+     before it shrinks them, which would drop the CTA below the logo. The grid
+     pins logo and CTA to row one and gives the links a row of their own, while
+     minmax(0, 1fr) lets the logo scale down to whatever width is left. */
+  @media screen and (max-width: 860px) {
+    .header .header-wrapper {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas:
+        "logo cta"
+        "nav  nav";
+      align-items: center;
+      column-gap: 12px;
+      row-gap: 10px;
+    }
+    .header .split-content.header-right { grid-area: logo; min-width: 0; }
+    .header .split-content.header-right .header-logo { max-width: 100%; height: auto; }
+    .header .split-content.header-left { grid-area: cta; margin-right: 0; }
+    /* width:100%, not justify-self: the item's used width resolves from the
+       Webflow flex rules and doesn't stretch to the area on its own, which
+       parks the links against the right edge. */
+    .header .split-content.header-center {
+      grid-area: nav;
+      width: 100%;
+      justify-content: center;
+      margin-right: 0;
+    }
+    .header .header-navigation.site-nav { gap: 28px; }
+    .header .header-navigation.site-nav .nav-link { font-size: 0.95rem; }
+  }
 </style>
 
 
@@ -45,6 +125,18 @@
         </a>
       </div>
       <div class="split-content header-center">
+        {/* Sits outside .w-nav-menu on purpose: Webflow's data-collapse="medium"
+            hides .w-nav-menu below 992px and expects the hamburger panel, which
+            this site doesn't ship. Keeping these two links out here means they
+            stay reachable at every width. */}
+        <ul role="list" class="header-navigation site-nav w-list-unstyled">
+          <li class="nav-item-wrapper">
+            <a href="/case-studies/" class="nav-link" aria-current={isCurrent('/case-studies') ? 'page' : undefined}>Case Studies</a>
+          </li>
+          <li class="nav-item-wrapper">
+            <a href="/blogs/" class="nav-link" aria-current={isCurrent('/blogs') ? 'page' : undefined}>Blog</a>
+          </li>
+        </ul>
         <nav role="navigation" data-w-id="14156406-4018-c65c-a1c8-d57b8e65795d" class="nav-menu w-nav-menu">
           <ul role="list" class="header-navigation none w-list-unstyled">
             <li class="nav-item-wrapper"><a href="/" class="nav-link">Home</a></li>

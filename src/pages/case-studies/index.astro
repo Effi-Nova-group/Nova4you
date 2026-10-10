@@ -1,0 +1,161 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const studies = (await getCollection('caseStudies')).sort((a, b) => a.data.order - b.data.order);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Case Studies — Nova4you',
+  description: 'How Nova4you turns audience intelligence into measurable return for global brands.',
+  url: 'https://nova4you.com/case-studies/',
+  isPartOf: { '@type': 'WebSite', name: 'Nova4you', url: 'https://nova4you.com/' },
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: studies.map((study, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: study.data.title,
+      url: `https://nova4you.com/case-studies/${study.id}/`,
+    })),
+  },
+};
+---
+
+<BaseLayout
+  title="Case Studies — Nova4you"
+  description="How Nova4you turns audience intelligence into measurable return for global brands including Gartner, GNC and IBM."
+  canonical="https://nova4you.com/case-studies/"
+  keywords="marketing case studies, ROAS case study, audience intelligence, media buying results, Gartner, GNC, IBM"
+  ogTitle="Case Studies — Nova4you"
+  ogDescription="How Nova4you turns audience intelligence into measurable return for global brands including Gartner, GNC and IBM."
+  jsonLd={jsonLd}
+>
+  <section class="cs-index">
+    <div class="cs-index__container">
+      <header class="cs-index__header">
+        <p class="cs-index__eyebrow">Case Studies</p>
+        <h1 class="cs-index__title">Audience Intelligence, Turned Into Measurable Return</h1>
+        <p class="cs-index__sub">
+          Deep dives into the campaigns behind the numbers — how we map an audience, build the
+          strategy around it, and what that delivered for the brands we partnered with.
+        </p>
+      </header>
+
+      <div class="cs-index__grid">
+        {studies.map((study) => (
+          <a href={`/case-studies/${study.id}/`} class="cs-card">
+            {/* Cards lead with the client logo, bled edge to edge - each mark carries
+                its own brand background. The campaign imagery is saved for the study
+                itself, where it has the room to be read. */}
+            <div class="cs-card__media">
+              {study.data.logo ? (
+                <Image
+                  src={study.data.logo}
+                  alt={`${study.data.client} logo`}
+                  widths={[400, 800, 1200]}
+                  sizes="(min-width: 900px) 50vw, 100vw"
+                  class="cs-card__img"
+                />
+              ) : (
+                <div class="cs-card__fallback" aria-hidden="true">
+                  <span class="cs-card__fallback-mark">{study.data.client.charAt(0)}</span>
+                </div>
+              )}
+            </div>
+
+            <div class="cs-card__body">
+              <span class="cs-card__sector">{study.data.sector}</span>
+              <h2 class="cs-card__title">{study.data.title}</h2>
+              <p class="cs-card__sub">{study.data.subtitle}</p>
+
+              {study.data.stats.length > 0 && (
+                <ul class="cs-card__stats">
+                  {study.data.stats.map((stat) => (
+                    <li class="cs-card__stat">
+                      <strong class="cs-card__stat-value">{stat.value}</strong>
+                      <span class="cs-card__stat-label">{stat.label}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              <span class="cs-card__cta">View case study →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Nova4you palette (matches public/css/blog.css) */
+  .cs-index {
+    --accent-red: #ff3d2e;
+    --accent-red-2: #ff9a2e;
+  }
+  /* The header is position:absolute over the page (~108px on desktop). */
+  .cs-index { padding: clamp(9rem, 12vw, 11rem) 0 clamp(4rem, 8vw, 6rem); background: #050505; color: #f4f0e8; }
+
+  /* At 860px the nav links drop to a second header row, taking it to ~190px. */
+  @media (max-width: 860px) { .cs-index { padding-top: 14rem; } }
+  .cs-index__container { max-width: 1240px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); }
+  .cs-index__header { text-align: center; max-width: 760px; margin: 0 auto 4rem; }
+  .cs-index__eyebrow { font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent-red); font-weight: 700; margin: 0 0 1rem; }
+  .cs-index__title { font-size: clamp(2.25rem, 5vw, 3.25rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 1rem; color: #fff; }
+  .cs-index__sub { font-size: 1.05rem; line-height: 1.6; color: rgba(244,240,232,0.65); margin: 0; }
+
+  .cs-index__grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 2rem; }
+  @media (max-width: 760px) { .cs-index__grid { grid-template-columns: 1fr; gap: 1.5rem; } }
+
+  .cs-card {
+    display: flex; flex-direction: column;
+    text-decoration: none; color: inherit;
+    background: linear-gradient(180deg, rgba(20,13,12,0.85), rgba(5,5,5,0.9));
+    border: 1px solid rgba(244,240,232,0.1);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .cs-card:hover { transform: translateY(-4px); border-color: rgba(255,61,46,0.35); box-shadow: 0 24px 60px -30px rgba(255,61,46,0.35); }
+
+  .cs-card__media { position: relative; aspect-ratio: 16/10; overflow: hidden; background: #fff; }
+
+  /* Logo fills the card field, centred. No hover zoom - scaling would clip. */
+  .cs-card__img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    display: block;
+  }
+
+  /* Branded panel stands in for a missing hero rather than an empty box */
+  .cs-card__fallback {
+    width: 100%; height: 100%;
+    display: grid; place-items: center;
+    background:
+      radial-gradient(120% 100% at 15% 0%, rgba(255,61,46,0.35), transparent 60%),
+      radial-gradient(120% 120% at 100% 100%, rgba(255,154,46,0.25), transparent 55%),
+      linear-gradient(140deg, #1a0b06, #050505);
+  }
+  .cs-card__fallback-mark { font-size: clamp(3rem, 8vw, 5rem); font-weight: 700; letter-spacing: -0.04em; color: rgba(255,255,255,0.18); line-height: 1; }
+
+  .cs-card__body { padding: 1.5rem 1.5rem 1.75rem; display: flex; flex-direction: column; gap: 0.7rem; flex: 1; }
+  .cs-card__sector { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; color: var(--accent-red); }
+  .cs-card__title { font-size: 1.3rem; line-height: 1.3; font-weight: 700; letter-spacing: -0.01em; margin: 0; color: #fff; }
+  .cs-card__sub { font-size: 0.95rem; line-height: 1.55; color: rgba(244,240,232,0.65); margin: 0; flex: 1; }
+
+  .cs-card__stats { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.35rem 0 0; padding: 0; }
+  .cs-card__stat {
+    display: inline-flex; align-items: baseline; gap: 0.4rem;
+    padding: 0.4rem 0.75rem; border-radius: 999px;
+    background: rgba(255,61,46,0.1); border: 1px solid rgba(255,61,46,0.3);
+  }
+  .cs-card__stat-value { font-size: 0.9rem; font-weight: 700; color: #fff; }
+  .cs-card__stat-label { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(244,240,232,0.6); }
+
+  .cs-card__cta { margin-top: 0.75rem; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-red); transition: color 0.2s ease; }
+  .cs-card:hover .cs-card__cta { color: var(--accent-red-2); }
+</style>

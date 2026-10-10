@@ -539,3 +539,12 @@ body.blog-body {
   .bento-large p { display: none; }
   .home-insights { padding: 5rem 5vw 4rem; }
 }
+
+/* -------- Header clearance --------
+   The site header is position:absolute over the page. Below 860px the
+   Case Studies / Blog links drop to a second header row, taking it from
+   ~108px to ~190px, so the first block on each page needs to clear more. */
+@media (max-width: 860px) {
+  .blog-hero { padding-top: 224px; }
+  .post-header { padding-top: 224px; }
+}
