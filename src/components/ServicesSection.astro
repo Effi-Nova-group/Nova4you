@@ -1,0 +1,47 @@
+---
+const services = [
+  {
+    num: '01',
+    title: 'Advanced AI & Digital Marketing',
+    tagline: 'Stop guessing. Start scaling.',
+    body: 'We use cutting-edge artificial intelligence to optimize your Google, Meta, and programmatic ad campaigns in real time.',
+    points: ['Hyper-targeted paid media', 'Predictive audience modeling', 'Automated ROI optimization'],
+  },
+  {
+    num: '02',
+    title: 'High-Impact TV & Radio Advertising',
+    tagline: 'Command attention where it matters most.',
+    body: 'We produce and place premium TV commercials and radio spots that build massive brand authority and trust across Australia.',
+    points: ['End-to-end script and video production', 'Strategic prime-time media buying', 'Cross-channel digital tracking for traditional media'],
+  },
+  {
+    num: '03',
+    title: 'Advanced CX (Customer Experience) Technologies',
+    tagline: 'Getting the click is only half the battle.',
+    body: 'We revolutionize how your customers interact with your brand, driving retention and maximizing lifetime value.',
+    points: ['Smart automation & AI chatbots', 'Frictionless user journey mapping', 'Data-driven personalization engines'],
+  },
+];
+---
+
+<section id="services" class="section services-section">
+  <div class="services-head">
+    <div class="home-eyebrow">Our Services · 03</div>
+    <h2 class="home-h2">Three connected engines for growth.</h2>
+  </div>
+  <div class="services-list">
+    {services.map((s) => (
+      <article class="service-row">
+        <div class="service-num">{s.num}</div>
+        <div class="service-main">
+          <h3>{s.title}</h3>
+          <p class="service-tagline">{s.tagline}</p>
+          <p class="service-body">{s.body}</p>
+        </div>
+        <ul class="service-points">
+          {s.points.map((point) => <li>{point}</li>)}
+        </ul>
+      </article>
+    ))}
+  </div>
+</section>

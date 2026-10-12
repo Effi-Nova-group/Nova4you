@@ -1,7 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroVideo from '../components/HeroVideo.astro';
-import ImpactSection from '../components/ImpactSection.astro';
+import HeroIntro from '../components/HeroIntro.astro';
+import EdgeSection from '../components/EdgeSection.astro';
+import ServicesSection from '../components/ServicesSection.astro';
+import AboutSection from '../components/AboutSection.astro';
 import LogoMarquee from '../components/LogoMarquee.astro';
 import BentoInsights from '../components/BentoInsights.astro';
 import ContactForm from '../components/ContactForm.astro';
@@ -16,7 +19,7 @@ const jsonLd = {
       alternateName: 'Nova4you',
       url: 'https://nova4you.com/',
       logo: 'https://nova4you.com/images/Screenshot-2026-07-24-at-10.30.50-am-1.png',
-      description: 'Full-service advertising and media agency operating on the philosophy of borderless creativity.',
+      description: 'Nova4You is a next-generation marketing and advertising agency bridging the gap between traditional media and AI-driven digital innovation.',
       telephone: '+61-1300-926-895',
       areaServed: 'AU',
     },
@@ -32,32 +35,35 @@ const jsonLd = {
       '@type': 'WebPage',
       '@id': 'https://nova4you.com/#webpage',
       url: 'https://nova4you.com/',
-      name: 'Nova4you — Borderless Creativity for Modern Brands',
+      name: 'Nova4You — The Future of Advertising, Engineered for Growth',
       isPartOf: { '@id': 'https://nova4you.com/#website' },
       about: { '@id': 'https://nova4you.com/#organization' },
       description:
-        'Full-service advertising and media agency delivering culture-changing campaigns across advertising, PR, CX, growth and specialist health marketing.',
+        'Nova4You is a next-generation marketing and advertising agency bridging the gap between traditional media and AI-driven digital innovation.',
     },
   ],
 };
 ---
 
 <BaseLayout
-  title="Nova4you — Borderless Creativity for Modern Brands"
-  description="Full-service advertising and media agency delivering culture-changing campaigns across advertising, PR, CX, growth and specialist health marketing."
+  title="Nova4You — The Future of Advertising, Engineered for Growth"
+  description="Nova4You is a next-generation marketing and advertising agency bridging the gap between traditional media and AI-driven digital innovation."
   canonical="https://nova4you.com/"
-  keywords="advertising agency, media agency, borderless creativity, brand strategy, PR agency, customer experience, growth marketing, healthcare marketing, Nova Group"
-  ogTitle="Nova4you — Borderless Creativity for Modern Brands"
-  ogDescription="A full-service advertising and media agency. We unite strategy, creative and media planning to deliver culture-changing campaigns for ambitious brands."
+  keywords="AI marketing agency, advertising agency Australia, AI digital marketing, TV advertising, radio advertising, customer experience technology, CX, programmatic advertising, Nova4You"
+  ogTitle="Nova4You — The Future of Advertising, Engineered for Growth"
+  ogDescription="We fuse advanced AI-driven digital marketing, prime-time TV & Radio, and hyper-personalized Customer Experience (CX) technologies to scale your brand."
   ogImage="https://nova4you.com/images/impact-hero.jpg"
-  ogImageAlt="Nova4you — culture-changing marketing campaigns"
-  twitterDescription="Full-service advertising and media agency delivering culture-changing campaigns."
+  ogImageAlt="Nova4You — AI-driven advertising engineered for growth"
+  twitterDescription="Nova4You is a next-generation marketing and advertising agency bridging the gap between traditional media and AI-driven digital innovation."
   includeBlogCss
   jsonLd={jsonLd}
 >
-  <link slot="head" rel="stylesheet" href="/css/home.css?v=heroLocalVideo2" />
+  <link slot="head" rel="stylesheet" href="/css/home.css?v=newCopy1" />
   <HeroVideo />
-  <ImpactSection />
+  <HeroIntro />
+  <EdgeSection />
+  <ServicesSection />
+  <AboutSection />
   <LogoMarquee />
   <BentoInsights />
   <ContactForm />

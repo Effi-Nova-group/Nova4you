@@ -1,0 +1,36 @@
+---
+const pillars = [
+  {
+    num: '01',
+    title: 'AI-Optimized Digital Marketing',
+    body: 'Predictive analytics and real-time machine learning ensure your ad spend goes exactly where it converts.',
+  },
+  {
+    num: '02',
+    title: 'Mass Media Amplification',
+    body: 'High-impact TV and Radio advertising that captures millions of ears and eyeballs, fully integrated with your digital funnel.',
+  },
+  {
+    num: '03',
+    title: 'Next-Gen CX Technologies',
+    body: 'We design seamless customer journeys using advanced data, ensuring every touchpoint turns a click into a lifelong customer.',
+  },
+];
+---
+
+<section id="edge" class="section edge-section">
+  <div class="edge-head">
+    <div class="home-eyebrow">The Nova4You Edge</div>
+    <h2 class="home-h2">Why choose between traditional reach and digital precision when you can have <span class="accent">both</span>?</h2>
+    <p class="edge-lead">At Nova4You, we don't just run campaigns—we build intelligent ecosystem marketing.</p>
+  </div>
+  <div class="edge-grid">
+    {pillars.map((p) => (
+      <div class="edge-card">
+        <div class="edge-num">{p.num}</div>
+        <h3>{p.title}</h3>
+        <p>{p.body}</p>
+      </div>
+    ))}
+  </div>
+</section>
