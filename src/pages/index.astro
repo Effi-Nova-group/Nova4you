@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroVideo from '../components/HeroVideo.astro';
-import HeroIntro from '../components/HeroIntro.astro';
 import EdgeSection from '../components/EdgeSection.astro';
 import ServicesSection from '../components/ServicesSection.astro';
 import AboutSection from '../components/AboutSection.astro';
@@ -58,9 +57,8 @@ const jsonLd = {
   includeBlogCss
   jsonLd={jsonLd}
 >
-  <link slot="head" rel="stylesheet" href="/css/home.css?v=newCopy1" />
+  <link slot="head" rel="stylesheet" href="/css/home.css?v=heroOverlay1" />
   <HeroVideo />
-  <HeroIntro />
   <EdgeSection />
   <ServicesSection />
   <AboutSection />

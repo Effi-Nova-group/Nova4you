@@ -1,12 +1,21 @@
 ---
 // Fullscreen looping hero video (local file) with mute toggle.
 // Desktop: full width, never cropped (object-fit: contain).
-// Mobile: hero section is 50vh and the video fills that box completely,
+// Mobile: hero grows to fit the copy (min 85svh) and the video fills it,
 // so slight left/right cropping is expected there (object-fit: cover).
+// Hero copy sits over the video inside #canvas, above a darkening overlay.
 ---
 
 <main class="seaction-header-main">
-  <div id="canvas" class="canvas"></div>
+  <div id="canvas" class="canvas hero-overlay-copy">
+    <div class="hero-overlay-inner">
+      <h1 class="hero-intro-headline">The Future of Advertising, <span class="accent">Engineered for Growth.</span></h1>
+      <p class="hero-intro-sub">We fuse advanced AI-driven digital marketing, prime-time TV &amp; Radio, and hyper-personalized Customer Experience (CX) technologies to scale your brand.</p>
+      <div class="button-primary-gradient hero-intro-cta">
+        <a href="/#contact" class="button-primary w-button">Scale Your Brand Now</a>
+      </div>
+    </div>
+  </div>
   <div class="header_background-image hero-video-wrap">
     <video
       id="hero-video"
