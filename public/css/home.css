@@ -43,7 +43,7 @@
     min-height: 85svh;
     max-height: none;
   }
-  .hero-overlay-copy { padding: 110px 5vw 88px; }
+  .hero-overlay-copy { padding: 110px 5vw 88px; height: auto; min-height: 85vh; min-height: 85svh; }
   .hero-video-wrap {
     height: 100%;
   }
@@ -131,7 +131,7 @@
 /* Hero copy over the video */
 .hero-overlay-copy {
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-end;
   padding: 120px 6vw 96px;
   text-transform: none;
   box-sizing: border-box;
